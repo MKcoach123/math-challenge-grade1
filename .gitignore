@@ -1,0 +1,11 @@
+.DS_Store
+**/.DS_Store
+.claude/
+__pycache__/
+**/__pycache__/
+**/_extract/
+**/_tiff/
+**/_sol/
+# Answer source docs stay local (not needed in the repo)
+**/solutions_week*.pages
+**/week*_solutions.pages
