@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 1 Math Challenge — Leaderboard</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, Arial, sans-serif; background: #f0f4ff; color: #1e293b; padding: 24px 16px 64px; }
+.page { max-width: 720px; margin: 0 auto; }
+
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+  color: #4f46e5; font-weight: 700; font-size: 15px; margin-bottom: 16px;
+  padding: 8px 16px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  transition: transform .15s, box-shadow .15s;
+}
+.back-link:hover { transform: translateX(-3px); box-shadow: 0 4px 12px rgba(0,0,0,.1); }
+
+.header {
+  background: linear-gradient(135deg, #1d4ed8, #4f46e5); color: #fff; border-radius: 16px;
+  padding: 26px 34px; margin-bottom: 24px; box-shadow: 0 6px 24px rgba(30,64,175,.3);
+}
+.header h1 { font-size: 30px; font-weight: 900; letter-spacing: -.5px; }
+.header .sub { font-size: 15px; opacity: .85; margin-top: 6px; }
+
+/* segmented control */
+.tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+.tab {
+  border: 2px solid #c7d2fe; background: #fff; color: #4f46e5; font-weight: 700; font-size: 15px;
+  border-radius: 10px; padding: 9px 18px; cursor: pointer; transition: all .15s;
+}
+.tab.active { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+.tab:hover:not(.active) { border-color: #94a3b8; }
+select.week-select {
+  border: 2px solid #c7d2fe; border-radius: 10px; padding: 9px 12px; font-size: 15px; font-weight: 600;
+  color: #1e293b; background: #fff; cursor: pointer; outline: none;
+}
+.refresh { margin-left: auto; border: none; background: none; color: #64748b; font-size: 14px; cursor: pointer; }
+.refresh:hover { color: #4f46e5; }
+
+.card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,.08); padding: 8px 8px; overflow: hidden; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 14px 18px; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: #94a3b8; border-bottom: 2px solid #eef2ff; }
+tbody tr { border-bottom: 1px solid #f1f5f9; }
+tbody tr:last-child { border-bottom: none; }
+td.rank { font-weight: 800; color: #64748b; width: 64px; }
+td.name { font-weight: 600; }
+td.pts { text-align: right; font-weight: 800; color: #4f46e5; }
+td.weeks { text-align: right; color: #94a3b8; width: 90px; }
+th.pts, th.weeks { text-align: right; }
+
+/* medals for top 3 */
+tr.top1 td.rank::before { content: "🥇 "; }
+tr.top2 td.rank::before { content: "🥈 "; }
+tr.top3 td.rank::before { content: "🥉 "; }
+tr.top1, tr.top2, tr.top3 { background: #fafbff; }
+tr.me { background: #fff7ed; box-shadow: inset 4px 0 0 #f59e0b; }
+
+.note { text-align: center; color: #94a3b8; font-size: 13px; margin-top: 12px; }
+.msg { text-align: center; color: #64748b; padding: 30px 12px; font-size: 15px; }
+.msg.error { color: #b91c1c; }
+
+/* find-my-rank */
+.findme { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,.08); padding: 20px 22px; margin-top: 22px; }
+.findme h2 { font-size: 16px; margin-bottom: 4px; }
+.findme p { font-size: 13px; color: #64748b; margin-bottom: 12px; }
+.findme .row { display: flex; gap: 10px; flex-wrap: wrap; }
+.findme input {
+  flex: 1; min-width: 180px; border: 2px solid #c7d2fe; border-radius: 8px; padding: 10px 14px; font-size: 15px; outline: none;
+}
+.findme input:focus { border-color: #4f46e5; }
+.findme button {
+  border: none; background: linear-gradient(135deg, #1d4ed8, #4f46e5); color: #fff; font-weight: 700; font-size: 15px;
+  border-radius: 8px; padding: 10px 22px; cursor: pointer;
+}
+.findme .result { margin-top: 14px; font-size: 15px; font-weight: 600; min-height: 22px; }
+.findme .result.hit { color: #15803d; }
+.findme .result.miss { color: #b45309; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <a class="back-link" href="../../index.html">← Home</a>
+
+  <div class="header">
+    <h1>🏆 Leaderboard</h1>
+    <div class="sub">Grade 1 Math Challenge</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" id="tabOverall" onclick="selectOverall()">Overall</button>
+    <button class="tab" id="tabWeek" onclick="selectWeekMode()">By week</button>
+    <select class="week-select" id="weekSelect" style="display:none" onchange="load()"></select>
+    <button class="refresh" id="refreshBtn" onclick="load()" title="Refresh">↻ Refresh</button>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead id="thead"></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="msg" id="msg" style="display:none"></div>
+  </div>
+  <div class="note" id="note"></div>
+
+  <div class="findme">
+    <h2>Find my rank</h2>
+    <p>Stayed private? Type your name exactly as you submitted it to see your own position.</p>
+    <div class="row">
+      <input type="text" id="meName" placeholder="First name Last initial" autocomplete="off"
+             onkeydown="if(event.key==='Enter')findMe()">
+      <button onclick="findMe()">Find me</button>
+    </div>
+    <div class="result" id="meResult"></div>
+  </div>
+
+</div>
+
+<script>
+// ── Paste the SAME Google Apps Script Web App URL used by the problem pages.
+const ENDPOINT_URL = "";
+
+// Every week that exists (kept in sync by build_week.py). The "By week" dropdown always lists
+// these, merged with any weeks that already have submissions — so new weeks show up immediately.
+const ALL_WEEKS = [
+  /* WEEKS:START */
+  
+  /* WEEKS:END */
+];
+
+let mode = 'overall';        // 'overall' | 'week'
+let knownWeeks = [];
+
+function selectOverall() {
+  mode = 'overall';
+  document.getElementById('tabOverall').classList.add('active');
+  document.getElementById('tabWeek').classList.remove('active');
+  document.getElementById('weekSelect').style.display = 'none';
+  load();
+}
+function selectWeekMode() {
+  mode = 'week';
+  document.getElementById('tabWeek').classList.add('active');
+  document.getElementById('tabOverall').classList.remove('active');
+  const sel = document.getElementById('weekSelect');
+  sel.style.display = knownWeeks.length ? '' : 'none';
+  load();
+}
+
+function showMsg(text, isError) {
+  document.getElementById('thead').innerHTML = '';
+  document.getElementById('tbody').innerHTML = '';
+  document.getElementById('note').textContent = '';
+  const m = document.getElementById('msg');
+  m.style.display = ''; m.textContent = text;
+  m.className = 'msg' + (isError ? ' error' : '');
+}
+
+function apiUrl(params) {
+  const u = new URL(ENDPOINT_URL);
+  Object.keys(params).forEach(k => { if (params[k]) u.searchParams.set(k, params[k]); });
+  return u.toString();
+}
+
+// ── Instant-load cache: show last-seen standings immediately, refresh in background.
+// The Apps Script backend takes 2–3s/call, so cached data makes the page feel instant.
+function cacheKey(week) { return 'mathlb:' + (week || '__overall__'); }
+function readCache(week) {
+  try {
+    const c = JSON.parse(localStorage.getItem(cacheKey(week)));
+    return (c && c.data && Array.isArray(c.data.rows)) ? c : null;
+  } catch (e) { return null; }
+}
+function writeCache(week, data) {
+  try { localStorage.setItem(cacheKey(week), JSON.stringify({ t: Date.now(), data })); } catch (e) {}
+}
+function setRefresh(state) {
+  const b = document.getElementById('refreshBtn');
+  if (!b) return;
+  b.textContent = state === 'updating' ? '↻ Updating…' : (state === 'retry' ? '↻ Retry' : '↻ Refresh');
+}
+
+async function load() {
+  if (!ENDPOINT_URL) { showMsg('Leaderboard not connected yet — set ENDPOINT_URL in this file.'); return; }
+  const week = (mode === 'week') ? document.getElementById('weekSelect').value : '';
+
+  // 1) Paint cached standings instantly (if we have any for this view).
+  const cached = readCache(week);
+  if (cached) {
+    if (!week && cached.data.weeks && cached.data.weeks.length) syncWeeks(cached.data.weeks);
+    render(cached.data);
+    setRefresh('updating');
+  } else {
+    showMsg('Loading…');
+  }
+
+  // 2) Fetch fresh in the background and update when it arrives.
+  try {
+    const res = await fetch(apiUrl({ view: 'leaderboard', week }));
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Failed to load');
+    // Only refresh the week list from an unfiltered (Overall) load — a per-week
+    // response only lists the selected week and would otherwise shrink the dropdown.
+    if (!week && data.weeks && data.weeks.length) syncWeeks(data.weeks);
+    writeCache(week, data);
+    render(data);
+    setRefresh('idle');
+  } catch (e) {
+    if (cached) {
+      setRefresh('retry');   // keep showing cached standings; let them retry
+    } else {
+      showMsg('Could not load the leaderboard. ' + e.message, true);
+      setRefresh('idle');
+    }
+  }
+}
+
+function syncWeeks(weeks) {
+  const merged = ALL_WEEKS.slice();
+  (weeks || []).forEach(w => { if (!merged.includes(w)) merged.push(w); });
+  if (JSON.stringify(merged) === JSON.stringify(knownWeeks)) return;
+  knownWeeks = merged;
+  const sel = document.getElementById('weekSelect');
+  const current = sel.value;
+  sel.innerHTML = merged.map(w => `<option value="${escapeAttr(w)}">${escapeHtml(w)}</option>`).join('');
+  if (merged.includes(current)) sel.value = current;
+}
+
+function render(data) {
+  const overall = data.scope === 'cumulative';
+  if (!data.rows.length) {
+    showMsg(overall ? 'No public scores yet — be the first!' : 'No public scores for this week yet.');
+    document.getElementById('note').textContent = footNote(data);
+    return;
+  }
+  document.getElementById('msg').style.display = 'none';
+  document.getElementById('thead').innerHTML =
+    '<tr><th>#</th><th>Name</th>' + (overall ? '<th class="weeks">Weeks</th>' : '') + '<th class="pts">Points</th></tr>';
+  document.getElementById('tbody').innerHTML = data.rows.map(r => {
+    const cls = r.rank <= 3 ? ' class="top' + r.rank + '"' : '';
+    return '<tr' + cls + '>'
+      + '<td class="rank">' + r.rank + '</td>'
+      + '<td class="name">' + escapeHtml(r.name) + '</td>'
+      + (overall ? '<td class="weeks">' + r.weeksPlayed + '</td>' : '')
+      + '<td class="pts">' + r.points + '</td></tr>';
+  }).join('');
+  document.getElementById('note').textContent = footNote(data);
+}
+
+function footNote(data) {
+  if (!data.hiddenCount) return '';
+  return data.hiddenCount + ' player' + (data.hiddenCount === 1 ? '' : 's')
+       + ' chose to stay private and ' + (data.hiddenCount === 1 ? 'is' : 'are') + ' not shown.';
+}
+
+async function findMe() {
+  const name = document.getElementById('meName').value.trim();
+  const out = document.getElementById('meResult');
+  if (!name) { out.textContent = ''; return; }
+  if (!ENDPOINT_URL) { out.className = 'result miss'; out.textContent = 'Leaderboard not connected yet.'; return; }
+  out.className = 'result'; out.textContent = 'Looking…';
+  const week = (mode === 'week') ? document.getElementById('weekSelect').value : '';
+  try {
+    const res = await fetch(apiUrl({ view: 'findme', name, week }));
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Lookup failed');
+    if (!data.found) {
+      out.className = 'result miss';
+      out.textContent = 'No scores found for “' + name + '” yet. Check the spelling matches your submission.';
+      return;
+    }
+    const scope = data.scope === 'week' ? 'this week' : 'overall';
+    out.className = 'result hit';
+    out.textContent = 'You’re #' + data.rank + ' of ' + data.totalStudents
+      + ' ' + scope + ' with ' + data.points + ' point' + (data.points === 1 ? '' : 's') + '. 🎉';
+  } catch (e) {
+    out.className = 'result miss'; out.textContent = 'Something went wrong: ' + e.message;
+  }
+}
+
+function escapeHtml(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function escapeAttr(s) { return escapeHtml(s).replace(/'/g, '&#39;'); }
+
+syncWeeks([]);   // populate the week dropdown from ALL_WEEKS right away
+load();
+</script>
+</body>
+</html>
