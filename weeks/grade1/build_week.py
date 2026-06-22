@@ -29,7 +29,7 @@ Problem types: "number"/"text" → free-text box; "choice" → A–E radio chips
 """
 import base64, json, pathlib, sys, html as _html
 
-ENDPOINT_URL = ""  # TODO: paste the Grade 1 Apps Script Web App /exec URL after deploying (see SHEET_SETUP.md)
+ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbwhousf9U3W_KSbEFs6HYTJ6ySsyeEK0fRcsHvM0p_L6wVAZteLLDNdfn-Itzh1BI6Vsg/exec"
 ACCENTS = ["#4f46e5", "#0891b2", "#7c3aed", "#db2777", "#ea580c", "#16a34a"]  # per-problem accents (up to 6)
 WEEK_COLORS = ["#4f46e5", "#0891b2", "#7c3aed", "#db2777", "#ea580c", "#16a34a", "#0284c7", "#9333ea"]
 EMOJI = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","🔟","⭐","🏁"]  # 1–10 keycaps; 11 = ⭐; 12 = 🏁 finish flag (final week)
