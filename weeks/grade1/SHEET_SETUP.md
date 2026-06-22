@@ -4,14 +4,16 @@ One script + one Sheet does everything: it **saves** each student's answers and 
 the scored leaderboard. The answer key lives in the Sheet and never reaches a browser.
 
 ## 1. Create the Sheet
-- <https://sheets.google.com> → blank spreadsheet → name it `Math Challenge`.
+- <https://sheets.google.com> → blank spreadsheet → name it **`Grade 1 Math Challenge`**
+  (a NEW sheet — separate from the Grade 4 one; this is what keeps the grades isolated).
+  It lives in your Google Drive, not in this repo.
 - Add a tab named **`AnswerKey`** (rename "Sheet1" or insert a new tab) with this header row:
 
   | Week | Answer 1 | Answer 2 | Answer 3 |
   |------|----------|----------|----------|
-  | Grade 4 — Week 2 | 9 | _(B/C/D…)_ | _(B/C/D…)_ |
+  | Grade 1 — Week 1 | 9 | _(B/C/D…)_ | _(B/C/D…)_ |
 
-  - The `Week` text must match the page's label **exactly** (`Grade 4 — Week 2`).
+  - The `Week` text must match the page's label **exactly** (`Grade 1 — Week 1`).
   - Fill answers as students submit them: numbers for free-text, the letter for multiple choice.
   - The `Submissions` tab is created automatically on the first submission — don't make it by hand.
 
@@ -27,13 +29,14 @@ the scored leaderboard. The answer key lives in the Sheet and never reaches a br
 - Sanity check: open that URL in a browser — you should see `{"ok":true,...}`.
 
 ## 4. Wire the URL into the pages
-Paste the `/exec` URL into the `ENDPOINT_URL = ""` line in **all three** places:
-- `weeks/grade4/week2/grade4_week2.html`  (so submissions save)
-- `weeks/grade4/week2/_build.py`           (so a rebuild keeps the URL)
-- `weeks/grade4/leaderboard.html`          (so the board can read scores)
+Paste the `/exec` URL into the `ENDPOINT_URL = ""` line in **both** places, then rebuild:
+- `weeks/grade1/build_week.py`     (so every (re)built week page submits to it)
+- `weeks/grade1/leaderboard.html`  (so the board can read scores)
+- then `cd weeks/grade1 && python3 build_week.py --all && python3 build_week.py --index`
+  (or just rebuild each week) so the URL is baked into the generated pages.
 
 ## 5. Test
-- Open `grade4_week2.html`, submit a name + answers → a row appears in `Submissions`.
+- Open a week page, submit a name + answers → a row appears in `Submissions`.
 - Open `leaderboard.html` → your score shows (if you chose "show my name"); private names
   appear only via **Find my rank**.
 
