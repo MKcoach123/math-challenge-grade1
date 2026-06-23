@@ -1,0 +1,50 @@
+{
+  "number": 1,
+  "week_label": "Grade 1 — Week 1",
+  "due": "Sunday night",
+  "image_max_width": "300px",
+  "problems": [
+    {
+      "type": "number",
+      "text": "How many more bricks are in the left stack than in the right stack?",
+      "image": "p1_bricks.png",
+      "image_width": "300px",
+      "print_width": "240px",
+      "unit": "bricks"
+    },
+    {
+      "type": "number",
+      "text": "Omar is playing soccer. In the first half he scores 4 goals, and in the second half he scores 7 goals. How many goals did Omar score during the game?",
+      "image": "p2_soccer.png",
+      "image_width": "140px",
+      "print_width": "120px",
+      "unit": "goals"
+    },
+    {
+      "type": "number",
+      "text": "The number on each stone is its weight. Which stone should you move to the other side to make the scale balance? Write its weight.",
+      "image": "p3_stones.png",
+      "image_width": "320px",
+      "print_width": "260px",
+      "label": "Stone weight:"
+    },
+    {
+      "type": "number",
+      "text": "What number goes in the square with the question mark?",
+      "image": "p4_sequence.png",
+      "image_width": "440px",
+      "print_width": "360px",
+      "label": "? ="
+    },
+    {
+      "type": "number",
+      "text": "How many frogs can balance one cat?",
+      "images": [
+        { "file": "p5_cats_a.png", "width": "300px", "print_width": "240px" },
+        { "file": "p5_cats_b.png", "width": "260px", "print_width": "210px" }
+      ],
+      "unit": "frogs"
+    }
+  ],
+  "solutions_available": false
+}
