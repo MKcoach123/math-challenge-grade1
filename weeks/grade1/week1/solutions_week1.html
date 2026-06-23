@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 1 — Week 1 · Solutions</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; background:#f0f4ff; color:#1e293b; padding:24px 16px 56px; }
+.page { max-width:760px; margin:0 auto; }
+.topnav { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+.topnav a { display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:#4f46e5; font-weight:700; font-size:15px; padding:8px 16px; background:#fff; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.06); transition:transform .15s; }
+.topnav a:hover { transform:translateY(-2px); }
+.topnav a.lb { color:#b45309; }
+.header { background:linear-gradient(135deg,#1d4ed8,#4f46e5); color:#fff; border-radius:16px; padding:26px 34px; margin-bottom:24px; box-shadow:0 6px 24px rgba(30,64,175,.3); }
+.header h1 { font-size:28px; font-weight:900; letter-spacing:-.5px; }
+.header .sub { font-size:15px; opacity:.85; margin-top:6px; }
+.sol { background:#fff; border-radius:16px; padding:24px 28px; margin-bottom:20px; box-shadow:0 2px 12px rgba(0,0,0,.08); border-left:6px solid #4f46e5; }
+.sol:nth-child(2){border-left-color:#0891b2}.sol:nth-child(3){border-left-color:#7c3aed}.sol:nth-child(4){border-left-color:#db2777}.sol:nth-child(5){border-left-color:#ea580c}.sol:nth-child(6){border-left-color:#16a34a}.sol:nth-child(7){border-left-color:#0d9488}
+.pnum { font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:#64748b; }
+.q { font-size:16px; line-height:1.5; margin:6px 0 14px; color:#334155; }
+.ans { display:inline-block; font-size:17px; font-weight:800; color:#166534; background:#dcfce7; border-radius:10px; padding:6px 16px; margin-bottom:12px; }
+.work { font-size:15px; line-height:1.6; }
+.work img { display:block; margin:12px 0; border:1px solid #e2e8f0; border-radius:8px; }
+.print-btn { background:rgba(255,255,255,.16); border:1.5px solid rgba(255,255,255,.65); border-radius:8px; padding:8px 18px; font-size:14px; font-weight:600; color:#fff; cursor:pointer; float:right; margin-top:2px; }
+.print-btn:hover { background:rgba(255,255,255,.30); border-color:#fff; }
+@media print {
+  @page { size:A4 portrait; margin:14mm; }
+  html, body { background:#fff !important; padding:0 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .page { max-width:100%; }
+  .topnav, .print-btn { display:none !important; }
+  .header { background:none !important; color:#000 !important; box-shadow:none !important; border-radius:0 !important; padding:0 0 8pt 0 !important; margin-bottom:12pt !important; border-bottom:2.5pt solid #1d4ed8; }
+  .header h1 { font-size:20pt !important; color:#1d4ed8 !important; } .header .sub { font-size:10.5pt !important; opacity:1 !important; color:#333 !important; }
+  .sol { background:none !important; box-shadow:none !important; border-radius:0 !important; padding:0 0 0 10pt !important; margin:0 0 12pt 0 !important; border-left-width:3.5pt !important; page-break-inside:avoid; break-inside:avoid; }
+  .pnum { font-size:10pt !important; } .q { font-size:11pt !important; margin:3pt 0 6pt !important; }
+  .ans { font-size:12pt !important; padding:3pt 12pt !important; margin-bottom:6pt !important; }
+  .work { font-size:11pt !important; line-height:1.45 !important; } .work img { margin:6pt 0 !important; border:none !important; }
+}
+</style>
+
+
+
+
+
+
+<style id="sol-gate-css">#sol-gate{position:fixed;inset:0;background:#f0f4ff;display:flex;align-items:center;justify-content:center;padding:24px;z-index:99999;font-family:'Segoe UI',system-ui,Arial,sans-serif}#sol-gate .box{background:#fff;border-radius:18px;box-shadow:0 8px 30px rgba(30,64,175,.18);padding:34px 32px;max-width:400px;width:100%;text-align:center}#sol-gate input{flex:1;border:2px solid #c7d2fe;border-radius:10px;padding:11px 14px;font-size:18px;text-align:center;letter-spacing:.15em;outline:none}#sol-gate input:focus{border-color:#4f46e5}#sol-gate button{border:none;background:linear-gradient(135deg,#1d4ed8,#4f46e5);color:#fff;font-weight:800;font-size:15px;border-radius:10px;padding:11px 20px;cursor:pointer}body.sol-locked .page{display:none!important}@media print{#sol-gate{display:none!important}}</style>
+</head>
+<body class="sol-locked">
+<!--SOLGATE--><div id="sol-gate"><div class="box"><div style="font-size:44px">&#128274;</div><h2 style="font-size:21px;font-weight:900;margin:6px 0 4px">Solutions are locked</h2><p style="font-size:14px;color:#64748b;margin-bottom:18px">Enter the teacher or developer passcode.</p><form onsubmit="return solUnlock(event)"><div style="display:flex;gap:10px"><input id="sol-pc" type="password" inputmode="numeric" placeholder="Passcode" autocomplete="off" autofocus><button type="submit">Open</button></div><div id="sol-err" style="color:#b91c1c;font-size:13px;font-weight:600;margin-top:12px;min-height:16px"></div></form><a href="../../../index.html" style="display:inline-block;margin-top:14px;font-size:13px;color:#94a3b8;text-decoration:none">&larr; Back to home</a></div></div><!--/SOLGATE-->
+
+
+
+
+
+
+
+<div class="page">
+  <div class="topnav">
+    <a href="../../../index.html">← Home</a>
+    <a href="grade1_week1.html">📝 Problems</a>
+    <a class="lb" href="../leaderboard.html">🏆 Leaderboard</a>
+  </div>
+  <div class="header">
+    <button class="print-btn" onclick="window.print()">🖨 Print</button>
+    <h1>Week 1 — Answers &amp; Solutions</h1>
+    <div class="sub">Grade 1 Math Challenge</div>
+  </div>
+  <div class="sol"><div class="pnum">Problem 1</div><div class="q">How many more bricks are in the left stack?</div><div class="ans">Answer: 5</div><div class="work">The two stacks are built the same way — except the left stack has one extra row along the bottom. That extra row has <b>5</b> bricks, so the left stack has 5 more than the right.</div></div>
+  <div class="sol"><div class="pnum">Problem 2</div><div class="q">How many goals did Omar score?</div><div class="ans">Answer: 11</div><div class="work">Add the goals from both halves: 4 + 7 = <b>11</b>.</div></div>
+  <div class="sol"><div class="pnum">Problem 3</div><div class="q">Which stone do you move, and what is its weight?</div><div class="ans">Answer: 2</div><div class="work">The left side is 6 + 2 + 3 = 11 and the right side is 4 + 3 = 7. Move the smallest stone, the <b>2</b>, over to the right: now the left is 6 + 3 = 9 and the right is 4 + 3 + 2 = 9 — balanced!</div></div>
+  <div class="sol"><div class="pnum">Problem 4</div><div class="q">What number goes in the square with the ?</div><div class="ans">Answer: 35</div><div class="work">Each step adds 5: 15 → 20 → 25 → 30 → <b>35</b>.</div></div>
+  <div class="sol"><div class="pnum">Problem 5</div><div class="q">How many frogs balance one cat?</div><div class="ans">Answer: 2</div><div class="work">2 cats balance 4 frogs. Half as many cats balance half as many frogs, so <b>1 cat balances 2 frogs</b>.</div></div>
+</div>
+
+
+
+
+
+
+
+<script id="sol-gate-js">const SOL_REVEALED=false;const SOL_HASHES=["42a8d10424653fc26a1319a0c7f84ea30f43c8a009e7d99fcd9e8151332bdcf3", "158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab"];async function solSha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("")}function solReveal(){document.body.classList.remove("sol-locked");var g=document.getElementById("sol-gate");if(g)g.style.display="none";}async function solUnlock(e){e.preventDefault();var err=document.getElementById("sol-err");err.textContent="";var h=await solSha(document.getElementById("sol-pc").value.trim());if(SOL_HASHES.indexOf(h)>=0){solReveal();}else{err.textContent="Wrong passcode — try again.";var i=document.getElementById("sol-pc");i.value="";i.focus();}return false;}if(SOL_REVEALED){solReveal();}</script>
+</body></html>
