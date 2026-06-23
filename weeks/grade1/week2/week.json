@@ -30,7 +30,7 @@
     },
     {
       "type": "number",
-      "text": "Amelia, Juliana, and Mira each write a different number on a paper. Amelia writes the smallest one-digit number possible, Juliana writes the biggest one-digit number possible, and Mira writes the sum of those two numbers. What number did Mira write?",
+      "text": "Amelia, Juliana, and Mira each write a different number on a paper. Amelia writes the smallest one-digit number possible that is greater than zero, Juliana writes the biggest one-digit number possible, and Mira writes the sum of those two numbers. What number did Mira write?",
       "label": "Mira wrote:"
     },
     {
