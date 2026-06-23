@@ -1,0 +1,47 @@
+{
+  "number": 2,
+  "week_label": "Grade 1 — Week 2",
+  "due": "Sunday night",
+  "image_max_width": "300px",
+  "problems": [
+    {
+      "type": "number",
+      "text": "How many triangles are there?",
+      "image": "p1_triangles.png",
+      "image_width": "320px",
+      "print_width": "260px",
+      "unit": "triangles"
+    },
+    {
+      "type": "number",
+      "text": "How many cats are hidden behind the fence?",
+      "image": "p2_fence.png",
+      "image_width": "320px",
+      "print_width": "260px",
+      "unit": "cats"
+    },
+    {
+      "type": "choice",
+      "text": "What goes in place of the question mark?",
+      "image": "p3_pattern.png",
+      "image_width": "240px",
+      "print_width": "200px",
+      "choices": ["A", "B", "C", "D"]
+    },
+    {
+      "type": "number",
+      "text": "Amelia, Juliana, and Mira each write a different number on a paper. Amelia writes the smallest one-digit number possible, Juliana writes the biggest one-digit number possible, and Mira writes the sum of those two numbers. What number did Mira write?",
+      "label": "Mira wrote:"
+    },
+    {
+      "type": "text",
+      "text": "Bluey has more lego pieces than Bingo, but fewer than Coco. Who has the most lego pieces?",
+      "image": "p5_dogs.png",
+      "image_width": "360px",
+      "print_width": "300px",
+      "label": "Most lego pieces:",
+      "maxlength": 10
+    }
+  ],
+  "solutions_available": false
+}
