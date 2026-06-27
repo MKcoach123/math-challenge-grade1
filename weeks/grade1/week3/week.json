@@ -20,7 +20,7 @@
         { "file": "p2_lock.png", "width": "110px", "print_width": "90px" },
         { "file": "p2_keys.png", "width": "440px", "print_width": "360px" }
       ],
-      "choices": ["A", "B", "C", "D"]
+      "choices": ["A", "B", "C", "D", "E"]
     },
     {
       "type": "number",
