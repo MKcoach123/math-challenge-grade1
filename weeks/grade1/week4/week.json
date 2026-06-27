@@ -1,0 +1,37 @@
+{
+  "number": 4,
+  "week_label": "Grade 1 — Week 4",
+  "due": "Sunday night",
+  "image_max_width": "300px",
+  "problems": [
+    {
+      "type": "number",
+      "text": "Alisa the squirrel has 15 acorns and she dropped them all. If she only picked up 11 of the acorns, how many acorns are still on the floor?",
+      "unit": "acorns"
+    },
+    {
+      "type": "number",
+      "text": "Maia is making cookies. She makes 5 chocolate chip cookies, 7 plain cookies, 6 strawberry cookies, and 4 vanilla cookies. How many cookies did Maia make in total?",
+      "unit": "cookies"
+    },
+    {
+      "type": "number",
+      "text": "How many pennies equal one dime?",
+      "unit": "pennies"
+    },
+    {
+      "type": "number",
+      "text": "Natalia is going on a walk. She sees 4 birds, 2 butterflies, and 6 dogs. How many animals does Natalia see?",
+      "unit": "animals"
+    },
+    {
+      "type": "number",
+      "text": "How many doggies will balance one lion?",
+      "image": "p5_balance.png",
+      "image_width": "440px",
+      "print_width": "360px",
+      "unit": "doggies"
+    }
+  ],
+  "solutions_available": false
+}
