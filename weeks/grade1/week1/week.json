@@ -5,12 +5,12 @@
   "image_max_width": "300px",
   "problems": [
     {
-      "type": "choice",
+      "type": "number",
       "text": "How many more bricks are in the left stack than in the right stack?",
       "image": "p1_bricks.png",
       "image_width": "300px",
       "print_width": "240px",
-      "choices": ["5", "9", "10", "15"]
+      "unit": "bricks"
     },
     {
       "type": "number",

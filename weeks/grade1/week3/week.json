@@ -5,13 +5,12 @@
   "image_max_width": "300px",
   "problems": [
     {
-      "type": "text",
+      "type": "choice",
       "text": "Adria goes for a walk to the park and meets 3 gnomes. She asks them their names. Their names are Nim, Tim, and Jim. The left gnome says “I am Nim,” the middle gnome says “I am not Nim,” and the gnome on the right says “I am not Tim.” What is the middle gnome's name?",
       "image": "p1_gnomes.png",
       "image_width": "360px",
       "print_width": "300px",
-      "label": "Middle gnome:",
-      "maxlength": 8
+      "choices": ["Nim", "Tim", "Jim"]
     },
     {
       "type": "choice",
