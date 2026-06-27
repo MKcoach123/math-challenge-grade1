@@ -1,0 +1,51 @@
+{
+  "number": 3,
+  "week_label": "Grade 1 — Week 3",
+  "due": "Sunday night",
+  "image_max_width": "300px",
+  "problems": [
+    {
+      "type": "text",
+      "text": "Adria goes for a walk to the park and meets 3 gnomes. She asks them their names. Their names are Nim, Tim, and Jim. The left gnome says “I am Nim,” the middle gnome says “I am not Nim,” and the gnome on the right says “I am not Tim.” What is the middle gnome's name?",
+      "image": "p1_gnomes.png",
+      "image_width": "360px",
+      "print_width": "300px",
+      "label": "Middle gnome:",
+      "maxlength": 8
+    },
+    {
+      "type": "choice",
+      "text": "Henry found a treasure chest with a lock, and some keys scattered on the ground. Which key does Henry need to open the chest and get the gold?",
+      "images": [
+        { "file": "p2_lock.png", "width": "110px", "print_width": "90px" },
+        { "file": "p2_keys.png", "width": "440px", "print_width": "360px" }
+      ],
+      "choices": ["A", "B", "C", "D"]
+    },
+    {
+      "type": "number",
+      "text": "Kira has 25 apples. If she eats 5 of them and gives 10 to her friend, how many apples will Kira have left?",
+      "image": "p3_apple.png",
+      "image_width": "150px",
+      "print_width": "120px",
+      "unit": "apples"
+    },
+    {
+      "type": "number",
+      "text": "Milana got a pencil for her birthday and wants to measure it. How long is her pencil?",
+      "image": "p4_pencil.png",
+      "image_width": "440px",
+      "print_width": "360px",
+      "label": "Length:"
+    },
+    {
+      "type": "number",
+      "text": "Sergio is writing math equations. He spilled some ink on the page. What number did the ink cover?",
+      "image": "p5_ink.png",
+      "image_width": "240px",
+      "print_width": "200px",
+      "label": "Number:"
+    }
+  ],
+  "solutions_available": false
+}
