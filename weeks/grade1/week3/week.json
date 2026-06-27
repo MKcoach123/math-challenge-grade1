@@ -10,7 +10,7 @@
       "image": "p1_gnomes.png",
       "image_width": "360px",
       "print_width": "300px",
-      "choices": ["Nim", "Tim", "Jim"]
+      "choices": ["Jim", "Nim", "Tim"]
     },
     {
       "type": "choice",
