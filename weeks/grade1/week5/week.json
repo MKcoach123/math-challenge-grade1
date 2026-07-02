@@ -1,0 +1,41 @@
+{
+  "number": 5,
+  "week_label": "Grade 1 — Week 5",
+  "due": "Sunday night",
+  "image_max_width": "300px",
+  "problems": [
+    {
+      "type": "text",
+      "text": "Ian has more candy than Michael but less than Athena. Who has the most candy?",
+      "label": "Most candy:",
+      "maxlength": 10
+    },
+    {
+      "type": "number",
+      "text": "Anusha is reading a book. On the first day she reads 10 pages. On the second day she reads 4 more pages than the first day. How many pages did Anusha read on the second day?",
+      "unit": "pages"
+    },
+    {
+      "type": "number",
+      "text": "Emily notices there are 5 more clouds today than there were yesterday. If there are 20 clouds today, how many clouds were there yesterday?",
+      "image": "p3_clouds.png",
+      "image_width": "280px",
+      "print_width": "230px",
+      "unit": "clouds"
+    },
+    {
+      "type": "number",
+      "text": "A teacher is writing problems on a piece of paper. What is the answer to this question?",
+      "image": "p4_board.png",
+      "image_width": "220px",
+      "print_width": "180px",
+      "label": "Answer ="
+    },
+    {
+      "type": "number",
+      "text": "Arthur is playing with his toy cars. He counts 2 red cars, 3 orange cars, 1 yellow car, green cars, 5 blue cars, and 4 purple cars. How many cars does Arthur have altogether?",
+      "unit": "cars"
+    }
+  ],
+  "solutions_available": false
+}
