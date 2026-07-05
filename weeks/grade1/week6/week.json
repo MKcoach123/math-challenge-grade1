@@ -1,0 +1,44 @@
+{
+  "number": 6,
+  "week_label": "Grade 1 — Week 6",
+  "due": "Sunday night",
+  "image_max_width": "300px",
+  "problems": [
+    {
+      "type": "number",
+      "text": "In a beehive there are 50 adult bees. Their jobs are: nectar collector, queen helper, and baby-bee sitter. If 14 bees are queen helpers and 18 bees are nectar collectors, how many bees are baby-bee sitters?",
+      "image": "p1_bee.png",
+      "image_width": "90px",
+      "print_width": "70px",
+      "unit": "bees"
+    },
+    {
+      "type": "number",
+      "text": "Jonathan's family is eating apples today. His sister eats 3 apples, his mom eats 5 apples, his dad eats 5 apples, and Jonathan eats 4 apples. How many apples did Jonathan's family eat today?",
+      "unit": "apples"
+    },
+    {
+      "type": "number",
+      "text": "Mishika draws a question mark on a number line. What number does the question mark represent?",
+      "image": "p3_numberline.png",
+      "image_width": "360px",
+      "print_width": "300px",
+      "label": "? ="
+    },
+    {
+      "type": "number",
+      "text": "How many apples are in the picture?",
+      "images": [
+        { "file": "p4_grid.png", "width": "280px", "print_width": "230px" },
+        { "file": "p4_legend.png", "width": "150px", "print_width": "120px" }
+      ],
+      "unit": "apples"
+    },
+    {
+      "type": "number",
+      "text": "Abby and Penny are making bracelets together. Abby makes 6 bracelets and Penny makes 7 bracelets. How many bracelets did they make in total?",
+      "unit": "bracelets"
+    }
+  ],
+  "solutions_available": false
+}
