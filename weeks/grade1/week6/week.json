@@ -6,7 +6,7 @@
   "problems": [
     {
       "type": "number",
-      "text": "In a beehive there are 50 adult bees. Their jobs are: nectar collector, queen helper, and baby-bee sitter. If 14 bees are queen helpers and 18 bees are nectar collectors, how many bees are baby-bee sitters?",
+      "text": "In a beehive there are 40 adult bees. Their jobs are: nectar collector, queen helper, and baby-bee sitter. If 14 bees are queen helpers and 18 bees are nectar collectors, how many bees are baby-bee sitters?",
       "image": "p1_bee.png",
       "image_width": "90px",
       "print_width": "70px",
