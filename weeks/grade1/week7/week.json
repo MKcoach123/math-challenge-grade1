@@ -1,0 +1,44 @@
+{
+  "number": 7,
+  "week_label": "Grade 1 — Week 7",
+  "due": "Sunday night",
+  "image_max_width": "300px",
+  "problems": [
+    {
+      "type": "number",
+      "text": "A gardener plants 5 roses, 10 hibiscus, 6 lavender, and 8 hydrangea bushes. How many bushes did she plant in total?",
+      "unit": "bushes"
+    },
+    {
+      "type": "number",
+      "text": "In a hotel, the first thing you see are the FIFA World Cup flags. The owner says that this year he has 5 more blue flags than last year. If last year there were 6 blue flags, how many blue flags are there this year?",
+      "unit": "flags"
+    },
+    {
+      "type": "choice",
+      "text": "Which square should go in place of the question mark?",
+      "images": [
+        { "file": "p3_grid.png", "width": "160px", "print_width": "130px" },
+        { "file": "p3_options.png", "width": "480px", "print_width": "380px" }
+      ],
+      "choices": ["A", "B", "C", "D", "E"]
+    },
+    {
+      "type": "number",
+      "text": "What number goes in the square with the question mark?",
+      "image": "p4_sequence.png",
+      "image_width": "440px",
+      "print_width": "360px",
+      "label": "? ="
+    },
+    {
+      "type": "number",
+      "text": "Mia is building a Lego set that has 30 pieces. They can be red, yellow, or blue. If there are 11 red and 9 yellow pieces, how many pieces are blue?",
+      "image": "p5_lego.png",
+      "image_width": "280px",
+      "print_width": "220px",
+      "unit": "blue pieces"
+    }
+  ],
+  "solutions_available": false
+}
