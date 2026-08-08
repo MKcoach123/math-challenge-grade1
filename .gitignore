@@ -6,6 +6,9 @@ __pycache__/
 **/_extract/
 **/_tiff/
 **/_sol/
-# Answer source docs stay local (not needed in the repo)
-**/solutions_week*.pages
-**/week*_solutions.pages
+# Answer source docs stay local (not needed in the repo).
+# Broad on purpose: a singular "week2_solution.pages" once slipped past the
+# plural-only patterns and got published to the public repo.
+**/solutions_*.pages
+**/*_solution.pages
+**/*_solutions.pages
