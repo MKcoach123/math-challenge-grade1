@@ -5,24 +5,37 @@
   "image_max_width": "300px",
   "problems": [
     {
-      "type": "number",
-      "text": "Alisa the squirrel has 15 acorns and she dropped them all. If she only picked up 11 of the acorns, how many acorns are still on the floor?",
-      "unit": "acorns"
+      "type": "choice",
+      "text": "What shape was cut out?",
+      "image": "p1_cutout.png",
+      "image_width": "440px",
+      "print_width": "360px",
+      "choices": ["A", "B", "C", "D"]
     },
     {
       "type": "number",
-      "text": "Maia is making cookies. She makes 5 chocolate chip cookies, 7 plain cookies, 6 strawberry cookies, and 4 vanilla cookies. How many cookies did Maia make in total?",
-      "unit": "cookies"
+      "text": "How many circles are there in the figure?",
+      "image": "p2_face.png",
+      "image_width": "260px",
+      "print_width": "210px",
+      "unit": "circles"
+    },
+    {
+      "type": "choice",
+      "text": "In the pattern below what comes next?",
+      "images": [
+        { "file": "p3_pattern.png", "width": "440px", "print_width": "360px" },
+        { "file": "p3_options.png", "width": "240px", "print_width": "200px" }
+      ],
+      "choices": ["A", "B", "C"]
     },
     {
       "type": "number",
-      "text": "How many pennies equal one dime?",
-      "unit": "pennies"
-    },
-    {
-      "type": "number",
-      "text": "Natalia is going on a walk. She sees 4 birds, 2 butterflies, and 6 dogs. How many animals does Natalia see?",
-      "unit": "animals"
+      "text": "How many more small gray squares are there than small white squares?",
+      "image": "p4_squares.png",
+      "image_width": "220px",
+      "print_width": "180px",
+      "unit": "squares"
     },
     {
       "type": "number",
