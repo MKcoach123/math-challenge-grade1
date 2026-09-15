@@ -10,7 +10,12 @@
       "image": "p1_cutout.png",
       "image_width": "440px",
       "print_width": "360px",
-      "choices": ["A", "B", "C", "D"]
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
     },
     {
       "type": "number",
@@ -23,11 +28,14 @@
     {
       "type": "choice",
       "text": "In the pattern below what comes next?",
-      "images": [
-        { "file": "p3_pattern.png", "width": "440px", "print_width": "360px" },
-        { "file": "p3_options.png", "width": "240px", "print_width": "200px" }
-      ],
-      "choices": ["A", "B", "C"]
+      "image": "p3_pattern.png",
+      "image_width": "440px",
+      "print_width": "360px",
+      "choices": [
+        "A",
+        "B",
+        "C"
+      ]
     },
     {
       "type": "number",
