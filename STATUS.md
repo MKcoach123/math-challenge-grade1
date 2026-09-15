@@ -9,8 +9,16 @@ Last updated: 2026-09-15
 
 ### ⏯️ Resuming (2026-09-15)
 
+**Week 4's five problems were fully replaced** and pushed live (see §3). The Sheet's `AnswerKey`
+row for Week 4 already matched the new set, so nothing was re-graded.
+
 Working tree is clean apart from `weeks/grade1/week3/week3_problems.pages` (a pre-existing local
 change, not from any recent edit). Everything else is committed and live.
+
+⚠️ **`weeks/grade1/week4/week4_problems.pages` is now STALE** — it still holds the old acorns /
+cookies / pennies problems, while the site serves the new set from
+`week4_problems NEW.pages` (both are tracked). Re-importing from the old file would silently
+resurrect the retired week. Same trap as Grade 4's `solutions_week2.pages`.
 
 🔴 **Biggest risk, shared with Grade 4:** the Grade 4 site was **blocked by the Santa Clara Unified
 web filter** on a district Chromebook (2026-09-09). This site is on the same `github.io` domain, so
@@ -57,7 +65,7 @@ key, open the Sheet's `AnswerKey` tab.
 | **Grade 1 — Week 1** | brick stacks (num,img), Omar's goals (num,img), stone to move (num,img), pyramid ? (num,img), frogs balance a cat (num,img) | ✅ built, locked |
 | **Grade 1 — Week 2** | count triangles (num,img), cats behind fence (num,img), pattern ? (choice,img), Amelia/Juliana/Mira numbers (num), Bluey lego most (text,img) | ✅ built, locked |
 | **Grade 1 — Week 3** | 3 gnomes' names (choice,img), treasure-chest key (choice,img), Kira's apples (num,img), pencil length (num,img), ink-spill equation (num,img) | ✅ built, locked |
-| **Grade 1 — Week 4** | Alisa's acorns (num), Maia's cookies (num), pennies in a dime (num), birds/butterflies/dogs (num), doggies balance a lion (num,img) | ✅ built, locked |
+| **Grade 1 — Week 4** | shape cut out (**choice A–D**,img), count circles in figure (num,img), pattern what comes next (**choice A–C**,2 img), gray vs white squares (num,img), doggies balance a lion (num,img) | ✅ built, locked |
 | **Grade 1 — Week 5** | Ian/Michael/Athena candy (text), Anusha's pages (num), Emily's clouds (num,img), teacher's problem (num,img), Arthur's toy cars (num) | ❌ **not built** |
 | **Grade 1 — Week 6** | beehive jobs, 40 bees (num,img), Jonathan's family apples (num), number line ? (num,img), count apples (num,img), Abby & Penny bracelets (num) | ❌ **not built** |
 | **Grade 1 — Week 7** | gardener's bushes (num), FIFA flags (num), square pattern ? (choice,img), pyramid ? (num,img), Mia's lego 30 pieces (num,img) | ❌ **not built** |
