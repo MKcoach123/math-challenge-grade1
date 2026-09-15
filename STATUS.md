@@ -1,11 +1,23 @@
 # Grade 1 Weekly Math Challenge — Status & Resume Guide
 
-Last updated: 2026-08-10
+Last updated: 2026-09-15
 
 > **Read this first if starting a new session.**
 > Sister project to the **Grade 4** challenge (`/Users/natalia/FunWithAI/MathChallenge`).
 > Same tooling and design, but a **fully separate site and backend** so the two grades never mix:
 > its own GitHub repo/URL, its own Google Sheet, and its own Apps Script Web App endpoint.
+
+### ⏯️ Resuming (2026-09-15)
+
+Working tree is clean apart from `weeks/grade1/week3/week3_problems.pages` (a pre-existing local
+change, not from any recent edit). Everything else is committed and live.
+
+🔴 **Biggest risk, shared with Grade 4:** the Grade 4 site was **blocked by the Santa Clara Unified
+web filter** on a district Chromebook (2026-09-09). This site is on the same `github.io` domain, so
+**assume it is blocked too**. Both grades need the district to allowlist `*.github.io` (or these
+two specific sites) **and** `script.google.com`. See Grade 4's `STATUS.md` §7 for the full
+diagnosis and a draft email to the technology coordinator. Embedding in Google Sites does **not**
+work around it. Until then, paper is the fallback.
 
 ⚠️ **This file is committed to a PUBLIC repo — never write answer keys or solutions into it.**
 The keys live in the Sheet's `AnswerKey` tab only. (Grade 4 keeps a local gitignored
@@ -50,6 +62,15 @@ key, open the Sheet's `AnswerKey` tab.
 | **Grade 1 — Week 6** | beehive jobs, 40 bees (num,img), Jonathan's family apples (num), number line ? (num,img), count apples (num,img), Abby & Penny bracelets (num) | ❌ **not built** |
 | **Grade 1 — Week 7** | gardener's bushes (num), FIFA flags (num), square pattern ? (choice,img), pyramid ? (num,img), Mia's lego 30 pieces (num,img) | ❌ **not built** |
 
+**Week 3 solution edits (2026-09-13):** Problem 4 (pencil length) now states the **unit** in both
+the answer line and the working, instead of giving a bare number — the figure is a 12-inch ruler,
+so the unit had been left implicit. Problem 5 (ink-spill equation) had its second sentence
+reworded to *show* the rearranging step rather than assert it. The `AnswerKey` was **not** touched
+— solution pages are display-only, and changing a key would re-grade past submissions.
+⚠️ Problem 4's `week.json` has no `"unit"` field, so students see a bare input box and may type the
+unit along with the number, which would not match a units-less key. Adding `"unit"` there would
+print the word beside the box (as Grade 4 does) and keep what students type clean.
+
 All existing solution pages are **passcode-locked** (`solutions_available: false`).
 Passcodes: developer `4891`, teacher `2026`.
 
@@ -72,6 +93,8 @@ week, build + lock solutions, change the backend, debug scoring). Substitute "gr
 Quick reference:
 - Build a week: `cd weeks/grade1 && python3 build_week.py weekN` (also rebuilds `index.html` + leaderboard week list)
 - Lock solutions: `python3 gate_solutions.py 4891 2026` (re-run after ANY edit to a solution page)
+  ⚠️ It rewrites **all** solution pages and leaves 3 blank lines in each, so untouched weeks show up
+  as modified. Revert the blank-line-only ones so the diff stays honest.
 - Reveal a week: set `"solutions_available": true` → re-run `gate_solutions.py` → `build_week.py --index` → push
 - Deploy: `git add -A && git commit -m "…" && git push` (Pages updates in ~1 min)
 - Debug scoring: `…/exec?view=debug` — but see the warning in §5
@@ -98,6 +121,11 @@ git history).
       to motivate students. Grade 1 already uses many. ⚠️ Check first whether a name is the *answer*:
       **Week 2 P5 (Coco), Week 3 P1 (Tim) and Week 5 P1 (Athena)** all answer with a name — renaming
       those means editing the `AnswerKey` and re-grading past submissions.
-- [ ] **Untested: school Chromebooks.** Backend is on `script.google.com`; if the district filters it,
-      pages load but submissions and the leaderboard fail. Test on a real device.
+- [ ] 🔴 **District filter blocks the sister site on school Chromebooks** (confirmed for Grade 4 on
+      2026-09-09; this site shares the `github.io` domain, so assume the same). Needs an allowlist
+      request to SCUSD for the site domain **and** `script.google.com`. See Grade 4 `STATUS.md` §7.
+- [ ] **Add the `"unit"` field** to Week 3 Problem 4 in `week.json`, then rebuild (§3).
+- [ ] **Mirror Grade 4's class-progress board** here once it is proven there — a collective,
+      non-competitive board (took part × got right = collected) driven by a `Roster` tab in the
+      Sheet. See Grade 4 `STATUS.md` §5b.
 - [ ] (Optional) purge `weeks/grade1/week2/week2_solution.pages` from git history if the old commits matter.
