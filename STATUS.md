@@ -65,7 +65,7 @@ key, open the Sheet's `AnswerKey` tab.
 | **Grade 1 — Week 1** | brick stacks (num,img), Omar's goals (num,img), stone to move (num,img), pyramid ? (num,img), frogs balance a cat (num,img) | ✅ built, locked |
 | **Grade 1 — Week 2** | count triangles (num,img), cats behind fence (num,img), pattern ? (choice,img), Amelia/Juliana/Mira numbers (num), Bluey lego most (text,img) | ✅ built, locked |
 | **Grade 1 — Week 3** | 3 gnomes' names (choice,img), treasure-chest key (choice,img), Kira's apples (num,img), pencil length (num,img), ink-spill equation (num,img) | ✅ built, locked |
-| **Grade 1 — Week 4** | shape cut out (**choice A–D**,img), count circles in figure (num,img), pattern what comes next (**choice A–C**,2 img), gray vs white squares (num,img), doggies balance a lion (num,img) | ✅ built, locked |
+| **Grade 1 — Week 4** | shape cut out (**choice A–D**,img), count circles in figure (num,img), pattern what comes next (**choice A–C**,img), gray vs white squares (num,img), doggies balance a lion (num,img) | ✅ built, locked |
 | **Grade 1 — Week 5** | Ian/Michael/Athena candy (text), Anusha's pages (num), Emily's clouds (num,img), teacher's problem (num,img), Arthur's toy cars (num) | ❌ **not built** |
 | **Grade 1 — Week 6** | beehive jobs, 40 bees (num,img), Jonathan's family apples (num), number line ? (num,img), count apples (num,img), Abby & Penny bracelets (num) | ❌ **not built** |
 | **Grade 1 — Week 7** | gardener's bushes (num), FIFA flags (num), square pattern ? (choice,img), pyramid ? (num,img), Mia's lego 30 pieces (num,img) | ❌ **not built** |
@@ -89,6 +89,13 @@ Passcodes: developer `4891`, teacher `2026`.
   via `"due"` in each `week.json`, so the week pages agree with the home page. All 7 weeks updated.
 - Change `"due"` in `week.json` and rebuild rather than editing the generated HTML, or the next
   `build_week.py` run reverts it.
+
+**Week 4 P3 figure (2026-09-15):** the pattern and its A/B/C options are **one composed image**,
+not two. Two figures rendered *side by side* with the options larger than the pattern circles,
+because the screen CSS leaves `.problem img` inline (`build_week.py:221`) while only the print rule
+sets `display:block`. Don't "fix" that globally — week 3 P2 puts its key and lock figures side by
+side on purpose. Both P3 sources have 99px circles natively, so stacking them unscaled is what
+makes the option circles match the pattern.
 
 ⚠️ **Reorder gotcha:** if you insert/reorder problems, the `AnswerKey` columns shift. Re-check the
 row order after editing a week.
