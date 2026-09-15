@@ -12,3 +12,6 @@ __pycache__/
 **/solutions_*.pages
 **/*_solution.pages
 **/*_solutions.pages
+# Catch-all: any .pages whose name mentions a solution, whatever the suffix.
+# "week4_solutions NEW.pages" slipped past the patterns above on 2026-09-15.
+**/*[Ss]olution*.pages
