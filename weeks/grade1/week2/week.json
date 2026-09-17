@@ -44,7 +44,7 @@
       "image": "p5_dogs.png",
       "image_width": "360px",
       "print_width": "300px",
-      "label": "Most lego pieces:",
+      "label": "Most Lego pieces:",
       "maxlength": 10
     }
   ],
