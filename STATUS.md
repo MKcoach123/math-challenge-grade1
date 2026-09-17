@@ -75,9 +75,13 @@ the answer line and the working, instead of giving a bare number — the figure 
 so the unit had been left implicit. Problem 5 (ink-spill equation) had its second sentence
 reworded to *show* the rearranging step rather than assert it. The `AnswerKey` was **not** touched
 — solution pages are display-only, and changing a key would re-grade past submissions.
-⚠️ Problem 4's `week.json` has no `"unit"` field, so students see a bare input box and may type the
-unit along with the number, which would not match a units-less key. Adding `"unit"` there would
-print the word beside the box (as Grade 4 does) and keep what students type clean.
+**Week 3 P4 ruler fixed (2026-09-17):** the ruler graphic was labelled `1,2,3,3,4,…,12` — thirteen
+marks with **"3" printed twice**, so every label after it sat one short. The pencil spans five inch
+intervals (the key is right), but a student reading the printed numbers saw "1" to "5" and answered
+**4**. Relabelled **0–12**; only the first four labels were wrong, which shows the ruler was always
+meant to start at 0 — as the solution's "read where its tip ends" already implied. The digits are
+the image's own glyphs shifted over, so the style matches. `"unit": "inches"` added at the same
+time (this was the long-standing open item below).
 
 All existing solution pages are **passcode-locked** (`solutions_available: false`).
 Passcodes: developer `4891`, teacher `2026`.
@@ -139,7 +143,7 @@ git history).
 - [ ] 🔴 **District filter blocks the sister site on school Chromebooks** (confirmed for Grade 4 on
       2026-09-09; this site shares the `github.io` domain, so assume the same). Needs an allowlist
       request to SCUSD for the site domain **and** `script.google.com`. See Grade 4 `STATUS.md` §7.
-- [ ] **Add the `"unit"` field** to Week 3 Problem 4 in `week.json`, then rebuild (§3).
+- [x] ~~Add the `"unit"` field to Week 3 Problem 4~~ — done 2026-09-17, with the ruler fix (§3).
 - [ ] **Mirror Grade 4's class-progress board** here once it is proven there — a collective,
       non-competitive board (took part × got right = collected) driven by a `Roster` tab in the
       Sheet. See Grade 4 `STATUS.md` §5b.
