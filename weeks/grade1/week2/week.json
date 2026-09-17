@@ -26,16 +26,21 @@
       "image": "p3_pattern.png",
       "image_width": "240px",
       "print_width": "200px",
-      "choices": ["A", "B", "C", "D"]
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
     },
     {
       "type": "number",
-      "text": "Amelia, Juliana, and Mira each write a different number on a paper. Amelia writes the smallest one-digit number possible that is greater than zero, Juliana writes the biggest one-digit number possible, and Mira writes the sum of those two numbers. What number did Mira write?",
+      "text": "Amelia, Juliana, and Mira each write a different number on a piece of paper. Amelia writes the smallest one-digit number possible that is greater than zero, Juliana writes the biggest one-digit number possible, and Mira writes the sum of those two numbers. What number did Mira write?",
       "label": "Mira wrote:"
     },
     {
       "type": "text",
-      "text": "Bluey has more lego pieces than Bingo, but fewer than Coco. Who has the most lego pieces?",
+      "text": "Bluey has more Lego pieces than Bingo, but fewer than Coco. Who has the most Lego pieces?",
       "image": "p5_dogs.png",
       "image_width": "360px",
       "print_width": "300px",
