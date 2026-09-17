@@ -6,20 +6,38 @@
   "problems": [
     {
       "type": "choice",
-      "text": "Adria goes for a walk to the park and meets 3 gnomes. She asks them their names. Their names are Nim, Tim, and Jim. The left gnome says “I am Nim,” the middle gnome says “I am not Nim,” and the gnome on the right says “I am not Tim.” What is the middle gnome's name?",
+      "text": "Adria goes for a walk to the park and meets 3 gnomes. She asks them their names. Their names are Nim, Tim, and Jim, and they always tell the truth. The left gnome says “I am Nim,” the middle gnome says “I am not Nim,” and the gnome on the right says “I am not Tim.” What is the middle gnome’s name?",
       "image": "p1_gnomes.png",
       "image_width": "360px",
       "print_width": "300px",
-      "choices": ["Jim", "Nim", "Tim"]
+      "choices": [
+        "Jim",
+        "Nim",
+        "Tim"
+      ]
     },
     {
       "type": "choice",
       "text": "Henry found a treasure chest with a lock, and some keys scattered on the ground. Which key does Henry need to open the chest and get the gold?",
       "images": [
-        { "file": "p2_lock.png", "width": "110px", "print_width": "90px" },
-        { "file": "p2_keys.png", "width": "440px", "print_width": "360px" }
+        {
+          "file": "p2_lock.png",
+          "width": "110px",
+          "print_width": "90px"
+        },
+        {
+          "file": "p2_keys.png",
+          "width": "440px",
+          "print_width": "360px"
+        }
       ],
-      "choices": ["A", "B", "C", "D", "E"]
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
     },
     {
       "type": "number",
@@ -32,6 +50,7 @@
     {
       "type": "number",
       "text": "Milana got a pencil for her birthday and wants to measure it. How long is her pencil?",
+      "unit": "inches",
       "image": "p4_pencil.png",
       "image_width": "440px",
       "print_width": "360px",
