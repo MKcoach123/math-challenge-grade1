@@ -75,10 +75,10 @@ the answer line and the working, instead of giving a bare number — the figure 
 so the unit had been left implicit. Problem 5 (ink-spill equation) had its second sentence
 reworded to *show* the rearranging step rather than assert it. The `AnswerKey` was **not** touched
 — solution pages are display-only, and changing a key would re-grade past submissions.
-**Week 3 P4 ruler fixed (2026-09-17):** the ruler graphic was labelled `1,2,3,3,4,…,12` — thirteen
+**Week 3 P4 ruler fixed (2026-09-17):** the ruler graphic was labeled `1,2,3,3,4,…,12` — thirteen
 marks with **"3" printed twice**, so every label after it sat one short. The pencil spans five inch
 intervals (the key is right), but a student reading the printed numbers saw "1" to "5" and answered
-**4**. Relabelled **0–12**; only the first four labels were wrong, which shows the ruler was always
+**4**. Relabeled **0–12**; only the first four labels were wrong, which shows the ruler was always
 meant to start at 0 — as the solution's "read where its tip ends" already implied. The digits are
 the image's own glyphs shifted over, so the style matches. `"unit": "inches"` added at the same
 time (this was the long-standing open item below).
