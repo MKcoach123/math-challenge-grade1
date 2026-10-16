@@ -256,31 +256,32 @@ body {{ font-family: 'Segoe UI', system-ui, Arial, sans-serif; background: #f0f4
 .print-btn:hover {{ background: rgba(255,255,255,.30); border-color: #fff; }}
 
 @media print {{
-  @page {{ size: A4 portrait; margin: 12mm 14mm; }}
+  @page {{ size: auto; margin: 10mm 14mm; }}
   html, body {{ background: white !important; padding: 0 !important; margin: 0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }}
   .page {{ max-width: 100%; margin: 0; }}
   input::placeholder {{ color: transparent !important; opacity: 0 !important; }}
   input::-webkit-input-placeholder {{ color: transparent !important; opacity: 0 !important; }}
   .topnav {{ display: none !important; }}
-  .header {{ background: none !important; color: black !important; border-radius: 0 !important; box-shadow: none !important; padding: 0 0 7pt 0 !important; margin-bottom: 12pt !important; border-bottom: 2.5pt solid #1d4ed8; }}
+  .header {{ background: none !important; color: black !important; border-radius: 0 !important; box-shadow: none !important; padding: 0 0 6pt 0 !important; margin-bottom: 8pt !important; border-bottom: 2.5pt solid #1d4ed8; }}
   .header h1 {{ font-size: 19pt !important; letter-spacing: 0 !important; color: #1d4ed8 !important; }}
   .header .sub {{ font-size: 10.5pt !important; margin-top: 2pt !important; opacity: 1 !important; color: #333 !important; }}
   .header .week-info {{ display: flex !important; margin-top: 5pt !important; font-size: 10pt !important; gap: 18pt !important; opacity: 1 !important; color: #333 !important; }}
   .header .week-info span {{ background: none !important; padding: 0 !important; border-radius: 0 !important; }}
   .print-btn {{ display: none !important; }}
-  .name-box {{ background: none !important; box-shadow: none !important; border-radius: 0 !important; border: none !important; padding: 0 !important; margin-bottom: 12pt !important; display: flex; align-items: baseline; gap: 8pt; }}
+  .name-box {{ background: none !important; box-shadow: none !important; border-radius: 0 !important; border: none !important; padding: 0 !important; margin-bottom: 8pt !important; display: flex; align-items: baseline; gap: 8pt; }}
   .name-box label {{ font-size: 11pt !important; font-weight: 700 !important; white-space: nowrap; }}
   .name-box input {{ flex: 1; border: none !important; border-bottom: 1pt solid #444 !important; border-radius: 0 !important; font-size: 11pt !important; background: none !important; padding: 1pt 4pt !important; }}
   #quiz {{ display: block; }}
-  .problem {{ background: none !important; box-shadow: none !important; border-radius: 0 !important; padding: 0 0 0 9pt !important; margin: 0 0 16pt 0 !important; border-left-width: 3.5pt !important; page-break-inside: avoid; break-inside: avoid; }}
+  .problem.page-start {{ break-before: page; page-break-before: always; }}
+  .problem {{ background: none !important; box-shadow: none !important; border-radius: 0 !important; padding: 0 0 0 9pt !important; margin: 0 0 11pt 0 !important; border-left-width: 3.5pt !important; page-break-inside: avoid; break-inside: avoid; }}
   .problem:last-of-type {{ margin-bottom: 0 !important; }}
-  .problem-num {{ font-size: 10pt !important; margin-bottom: 4pt !important; }}
+  .problem-num {{ font-size: 10pt !important; margin-bottom: 3pt !important; }}
   .problem-text {{ font-size: 11pt !important; line-height: 1.35 !important; margin: 2pt 0 4pt !important; }}
   .hint-toggle {{ display: none !important; }}
   .hint-text {{ display: inline !important; font-style: italic !important; color: #333 !important; }}
   .hint-text::before {{ content: "💡 Hint:"; font-style: normal; font-weight: 700; color: #000; }}
-  .problem img {{ width: auto; max-width: var(--pw, var(--sw, 100%)) !important; max-height: 230pt !important; height: auto !important; margin: 4pt 0 6pt !important; border: none !important; display: block; }}
-  .answer-area {{ margin-top: 6pt !important; gap: 12pt !important; }}
+  .problem img {{ width: auto; max-width: var(--pw, var(--sw, 100%)) !important; max-height: 230pt !important; height: auto !important; margin: 3pt 0 4pt !important; border: none !important; display: block; }}
+  .answer-area {{ margin-top: 4pt !important; gap: 12pt !important; }}
   .answer-label {{ font-size: 11pt !important; }}
   .answer-area input[type=text] {{ border: none !important; border-bottom: 1.5pt solid #333 !important; border-radius: 0 !important; font-size: 12pt !important; width: 90px !important; background: none !important; padding: 1pt 2pt !important; }}
   .unit {{ font-size: 10.5pt !important; }}
@@ -293,9 +294,12 @@ body {{ font-family: 'Segoe UI', system-ui, Arial, sans-serif; background: #f0f4
 }}"""
 
 
-def render_problem(i, p, week_dir, img_max_width=None):
+def render_problem(i, p, week_dir, img_max_width=None, page_starts=()):
     n = i + 1
-    parts = [f'    <div class="problem">', f'      <div class="problem-num">Problem {n}</div>']
+    # "page-start" forces a printed page break before this problem. Printing relies on
+    # explicit breaks, not on automatic flow — see Grade 4 STATUS.md §6 "Printing" for why.
+    cls = "problem page-start" if n in page_starts else "problem"
+    parts = [f'    <div class="{cls}">', f'      <div class="problem-num">Problem {n}</div>']
     if p.get("html"):                         # raw HTML (e.g. inline SVG) — not escaped
         parts.append(f'      <p class="problem-text">{p["html"]}</p>')
     elif p.get("text"):
@@ -348,7 +352,11 @@ def render_week(week_dir, cfg):
     title = cfg.get("title", cfg["week_label"])
     due = cfg.get("due", "Sunday night")
     img_max_width = cfg.get("image_max_width")   # week-level default cap for figures, e.g. "280px"
-    problems_html = "\n\n".join(render_problem(i, p, week_dir, img_max_width) for i, p in enumerate(problems))
+    # Which problems start a fresh printed page. Default: three per page. Override per week
+    # with "page_starts": [4] (1-based problem numbers), or [] to let the print flow run free.
+    page_starts = set(cfg.get("page_starts", range(4, num + 1, 3)))
+    problems_html = "\n\n".join(
+        render_problem(i, p, week_dir, img_max_width, page_starts) for i, p in enumerate(problems))
 
     return f"""<!DOCTYPE html>
 <html lang="en">
