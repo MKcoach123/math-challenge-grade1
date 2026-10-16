@@ -35,7 +35,7 @@
     {
       "type": "text",
       "text": "Ian has more candy than Michael but less than Mira. Who has the most candies?",
-      "label": "Most candy:",
+      "label": "Most candies:",
       "maxlength": 10
     }
   ],
