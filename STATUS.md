@@ -104,6 +104,34 @@ makes the option circles match the pattern.
 ⚠️ **Reorder gotcha:** if you insert/reorder problems, the `AnswerKey` columns shift. Re-check the
 row order after editing a week.
 
+## 3c. Printing (fixed 2026-10-16 — mirrors Grade 4)
+
+⚠️ **A problem could vanish from the printout.** Grade 4 Week 6 printed and saved to PDF with its
+last problem **missing entirely** — not moved to another page, gone. Every `.problem` has
+`break-inside: avoid`, so one that doesn't fit is pushed whole to the next page; WebKit fixes the
+page count up front from the unbroken document height, so once those pushes run past the last page
+the overflow has nowhere to land and is dropped. Anything that shrinks the usable page height sets
+it off — Safari's **"Print headers and footers" is on by default and costs ~70pt on its own**.
+
+The same three fixes are now in this repo's `build_week.py`:
+1. `.problem.page-start { break-before: page }`, applied by default to every 3rd problem
+   (`page_starts` in `render_week`). A *forced* break makes WebKit allocate a real page, so content
+   can no longer be pushed past the end. Worst case a sheet spills; nothing is lost.
+2. `@page { size: auto }` instead of `size: A4 portrait` — these print on US Letter.
+3. Tightened print spacing (header/name-box margins, `.problem` 16→11pt, image/answer margins).
+
+All 7 weeks rebuilt; each prints **3 + 2**, except:
+- **Week 5 is `"page_starts": []`** in its `week.json` — it is all text and fits on **one sheet**,
+  so a forced break would split a one-page worksheet in two. Measured at ~630pt of 665pt.
+- **Week 3 is the tight one:** problems 1–3 run to ~697pt, over the ~665pt that is left when
+  headers/footers are on, so it then spills to three sheets (2 \| 1 \| 2). Nothing is lost.
+  Telling teachers to untick **"Print headers and footers"** keeps every week at two sheets.
+
+⚠️ If a week prints with too much white space on page 1, set `"page_starts": []` in its
+`week.json` and rebuild — don't remove the mechanism from `build_week.py`.
+
+---
+
 ## 4. How to make changes
 
 Identical to the Grade 4 project — see that repo's `STATUS.md` §6 for the full how-to (add/update a
