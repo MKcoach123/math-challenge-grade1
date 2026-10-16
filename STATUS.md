@@ -66,7 +66,7 @@ key, open the Sheet's `AnswerKey` tab.
 | **Grade 1 — Week 2** | count triangles (num,img), cats behind fence (num,img), pattern ? (choice,img), Amelia/Juliana/Mira numbers (num), Bluey lego most (text,img) | ✅ built, locked |
 | **Grade 1 — Week 3** | 3 gnomes' names (choice,img), treasure-chest key (choice,img), Kira's apples (num,img), pencil length (num,img), ink-spill equation (num,img) | ✅ built, locked |
 | **Grade 1 — Week 4** | shape cut out (**choice A–D**,img), count circles in figure (num,img), pattern what comes next (**choice A–C**,img), gray vs white squares (num,img), doggies balance a lion (num,img) | ✅ built, locked |
-| **Grade 1 — Week 5** | Ian/Michael/Athena candy (text), Anusha's pages (num), Emily's clouds (num,img), teacher's problem (num,img), Arthur's toy cars (num) | ❌ **not built** |
+| **Grade 1 — Week 5** | missing digits (**choice, word pills**,img), Anusha's pages (num), piece missing from house (**choice A–E**,img), butterflies = 12 (num,img), Ian/Michael/Mira candy (text) | ✅ built, locked |
 | **Grade 1 — Week 6** | beehive jobs, 40 bees (num,img), Jonathan's family apples (num), number line ? (num,img), count apples (num,img), Abby & Penny bracelets (num) | ❌ **not built** |
 | **Grade 1 — Week 7** | gardener's bushes (num), FIFA flags (num), square pattern ? (choice,img), pyramid ? (num,img), Mia's lego 30 pieces (num,img) | ❌ **not built** |
 
@@ -103,6 +103,30 @@ makes the option circles match the pattern.
 
 ⚠️ **Reorder gotcha:** if you insert/reorder problems, the `AnswerKey` columns shift. Re-check the
 row order after editing a week.
+
+**Week 5 fully replaced (2026-10-16).** All five problems are new except Anusha's pages (still P2).
+Source: `week5_problems NEW.pages`; `week5_problems.pages` is now **STALE** — same trap as Week 4.
+
+🔴 **The `AnswerKey` row for `Grade 1 — Week 5` must be rewritten before this goes out.** Every
+answer but P2 changed, and the problems were reordered, so the columns shift (the §3 reorder
+gotcha). Week 5 already has real submissions — rewriting the key **re-grades them**, turning past
+correct answers wrong. Decide that deliberately; the keys are in the Sheet, not here.
+
+- **P1 is answered with a word pill, not a letter** — the options are text ("3 and 5", "4 and 8", …)
+  so the submitted value is the phrase itself, like Week 3's Jim/Nim/Tim. The key must be the
+  phrase, not "C". P3's options are *pictures*, so it stays A–E letters.
+- The candy problem's third character was **renamed** and it moved from **P1 to P5**. It is
+  still a name-as-answer, so the key changes as well as the column — see §5.
+- Author fixes made while building, flag if unwanted: the solution for the butterflies said
+  "2 + 2 + 2 = 6 which is less than **9**" where the target is 12; "Lets" → "Let's" (the author
+  writes "Let's" in P5); "Same number is hiding behind a butterfly" → "The same number is hiding
+  behind **each** butterfly"; "Who has most candies?" → "Who has **the** most candies?".
+- P3's figure is the house and its A–E options **composed into one image** — two separate `<img>`
+  render side by side on screen (§3b, same as Week 4 P3).
+- `"page_starts"` was removed: Week 5 used to be all text and fit one sheet, but with four figures
+  it now needs two, so it takes the default break before P4. Print widths for P1/P3 were trimmed
+  (265px/300px) so problems 1–3 clear a page — screen sizes are untouched.
+- The old `p3_clouds.png` / `p4_board.png` figures were deleted; nothing references them.
 
 ## 3c. Printing (fixed 2026-10-16 — mirrors Grade 4)
 
@@ -153,7 +177,7 @@ git history).
 
 ## 5. Open items / next steps
 
-- [ ] **Build solutions for weeks 5, 6, 7** (weeks 1–4 done).
+- [ ] **Build solutions for weeks 6, 7** (weeks 1–5 done).
 - [ ] **`?view=debug` on the public endpoint returns every answer key** to anyone who calls it, and the
       endpoint URL is visible in each problem page's source. Consider gating the debug view behind a
       query token, or removing it once scoring is verified. (Same issue in the Grade 4 backend.)
@@ -166,8 +190,9 @@ git history).
       `build_week.py` and `index.html`, so it needs the same edit plus the CSS in `index.html`.
 - [ ] **Consider classmate names in problems** — Grade 4 is renaming characters to real class names
       to motivate students. Grade 1 already uses many. ⚠️ Check first whether a name is the *answer*:
-      **Week 2 P5 (Coco), Week 3 P1 (Tim) and Week 5 P1 (Athena)** all answer with a name — renaming
-      those means editing the `AnswerKey` and re-grading past submissions.
+      **Week 2 P5, Week 3 P1 and Week 5 P5** are all answered with a name — renaming the
+      character means editing the `AnswerKey` and re-grading past submissions. (The names
+      themselves are deliberately not listed here: this is a public repo. Check the Sheet.)
 - [ ] 🔴 **District filter blocks the sister site on school Chromebooks** (confirmed for Grade 4 on
       2026-09-09; this site shares the `github.io` domain, so assume the same). Needs an allowlist
       request to SCUSD for the site domain **and** `script.google.com`. See Grade 4 `STATUS.md` §7.
