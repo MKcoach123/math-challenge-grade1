@@ -1,24 +1,32 @@
 # Grade 1 Weekly Math Challenge — Status & Resume Guide
 
-Last updated: 2026-09-15
+Last updated: 2026-10-20
 
 > **Read this first if starting a new session.**
 > Sister project to the **Grade 4** challenge (`/Users/natalia/FunWithAI/MathChallenge`).
 > Same tooling and design, but a **fully separate site and backend** so the two grades never mix:
 > its own GitHub repo/URL, its own Google Sheet, and its own Apps Script Web App endpoint.
 
-### ⏯️ Resuming (2026-09-15)
+### ⏯️ Resuming (2026-10-20)
 
-**Week 4's five problems were fully replaced** and pushed live (see §3). The Sheet's `AnswerKey`
-row for Week 4 already matched the new set, so nothing was re-graded.
+**Everything is committed, pushed and verified live.** The only thing in the working tree is
+`weeks/grade1/week3/week3_problems.pages` — a pre-existing local change, not from any recent edit.
 
-Working tree is clean apart from `weeks/grade1/week3/week3_problems.pages` (a pre-existing local
-change, not from any recent edit). Everything else is committed and live.
+**The site now presents as "Sets", not weeks** — see **§1a**. Same display-only change as Grade 4:
+`week_label`, folders and file names all still say *Week*, so scoring and the leaderboard are
+untouched and the Sheet needed no edit.
 
-⚠️ **`weeks/grade1/week4/week4_problems.pages` is now STALE** — it still holds the old acorns /
-cookies / pennies problems, while the site serves the new set from
-`week4_problems NEW.pages` (both are tracked). Re-importing from the old file would silently
-resurrect the retired week. Same trap as Grade 4's `solutions_week2.pages`.
+**Since the last update:**
+- **Weeks 4 and 5 were each fully replaced** with new problem sets (and week 5's solutions built).
+  Both times the Sheet's `AnswerKey` already matched the new set, so nothing was re-graded.
+- **Weeks 1–4 were proofread and fixed** (2026-09-17) — most importantly the **Week 3 P4 ruler**,
+  which was labelled `1,2,3,3,4,…` and so made the careful reader answer 4 instead of 5 (§3).
+- Solutions now exist for **sets 1–5**; **6 and 7 are still unbuilt**.
+
+⚠️ **Stale `.pages` source docs.** `week4_problems.pages` still holds the retired acorns/cookies
+problems next to the live `week4_problems NEW.pages`, and week 5 has the same pattern. Re-importing
+from the plain-named file would silently resurrect a retired set. Check the modified date before
+re-importing anything.
 
 🔴 **Biggest risk, shared with Grade 4:** the Grade 4 site was **blocked by the Santa Clara Unified
 web filter** on a district Chromebook (2026-09-09). This site is on the same `github.io` domain, so
@@ -120,7 +128,7 @@ key, open the Sheet's `AnswerKey` tab.
 | Week | Problems | Solutions page |
 |------|----------|----------------|
 | **Grade 1 — Week 1** | brick stacks (num,img), Omar's goals (num,img), stone to move (num,img), pyramid ? (num,img), frogs balance a cat (num,img) | ✅ built, locked |
-| **Grade 1 — Week 2** | count triangles (num,img), cats behind fence (num,img), pattern ? (choice,img), Amelia/Juliana/Mira numbers (num), Bluey lego most (text,img) | ✅ built, locked |
+| **Grade 1 — Week 2** | count triangles (num,img), cats behind fence (num,img), pattern ? (choice,img), Amelia/Juliana/Mira numbers (num), Bluey Lego most (text,img) | ✅ built, locked |
 | **Grade 1 — Week 3** | 3 gnomes' names (choice,img), treasure-chest key (choice,img), Kira's apples (num,img), pencil length (num,img), ink-spill equation (num,img) | ✅ built, locked |
 | **Grade 1 — Week 4** | shape cut out (**choice A–D**,img), count circles in figure (num,img), pattern what comes next (**choice A–C**,img), gray vs white squares (num,img), doggies balance a lion (num,img) | ✅ built, locked |
 | **Grade 1 — Week 5** | missing digits (**choice, word pills**,img), Anusha's pages (num), piece missing from house (**choice A–E**,img), butterflies = 12 (num,img), Ian/Michael/Mira candy (text) | ✅ built, locked |
@@ -140,7 +148,7 @@ meant to start at 0 — as the solution's "read where its tip ends" already impl
 the image's own glyphs shifted over, so the style matches. `"unit": "inches"` added at the same
 time (this was the long-standing open item below).
 
-All existing solution pages are **passcode-locked** (`solutions_available: false`).
+Solutions exist for sets 1–5; 6 and 7 are unbuilt. All existing solution pages are **passcode-locked** (`solutions_available: false`).
 Passcodes: developer `4891`, teacher `2026`.
 
 ## 3b. Site wording (matched to Grade 4 on 2026-08-08)
@@ -234,17 +242,30 @@ git history).
 
 ## 5. Open items / next steps
 
-- [ ] **Build solutions for weeks 6, 7** (weeks 1–5 done).
+- [ ] **Build solutions for sets 6 and 7** (1–5 done).
 - [ ] **`?view=debug` on the public endpoint returns every answer key** to anyone who calls it, and the
       endpoint URL is visible in each problem page's source. Consider gating the debug view behind a
       query token, or removing it once scoring is verified. (Same issue in the Grade 4 backend.)
 - [x] ~~Grade 4's `STATUS.md` publishes its full answer-key table~~ — stripped 2026-08-10; keys moved
       to a gitignored `ANSWER_KEYS.md` there. (Both repos' histories still contain what was published.)
-- [ ] **Reveal solutions per deadline:** flip `solutions_available` → re-gate → rebuild → push.
+- [ ] **Reveal solutions when ready:** flip `solutions_available` → re-gate → rebuild → push. With
+      no deadlines shown on the pages any more (§1a), this is a judgement call per set.
 - [x] ~~Per-week due date placeholder~~ — all 7 weeks now say **Friday afternoon** (2026-08-08).
-- [ ] **Mirror Grade 4's week-status feature** here: a `CURRENT_WEEK` constant in `build_week.py`
+- [ ] **Mirror Grade 4's week-status feature** here — low priority: it is switched off in Grade 4
+      too (`SHOW_STATUS = False`, §1a). If mirrored, bring the flag across with it.
+      Originally: a `CURRENT_WEEK` constant in `build_week.py`
       marking this week / past / "coming soon" on the home-page cards. Grade 1 has its own copy of
       `build_week.py` and `index.html`, so it needs the same edit plus the CSS in `index.html`.
+- [ ] **Proofreading outstanding in sets 6–7.** Sets 1–4 were proofread and fixed on 2026-09-17;
+      **set 5 has been replaced since and never proofread.** Still open, re-checked 2026-10-20:
+      - **Set 6 P4** — the legend image reads "**bannana**". It is baked into `p4_legend.png`, so it
+        needs an image edit, not a text one. ("Apple" is also capitalized while the other two are not.)
+      - **Set 7 P2** — "In a hotel, the first thing you see **are** the FIFA World Cup flags":
+        subject–verb disagreement. Either "the first thing you see **is**" or "the first **things**".
+      - **Set 7 P3** — the kangaroo jigsaw answer (`e`) could **not** be verified from the figures.
+        Every other answer in sets 1–7 was recomputed or checked against its figure and agrees with
+        the live key; this is the one worth a human look.
+- [ ] **Proofread the replaced set 5.**
 - [ ] **Consider classmate names in problems** — Grade 4 is renaming characters to real class names
       to motivate students. Grade 1 already uses many. ⚠️ Check first whether a name is the *answer*:
       **Week 2 P5, Week 3 P1 and Week 5 P5** are all answered with a name — renaming the
