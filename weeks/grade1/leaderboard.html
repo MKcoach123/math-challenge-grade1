@@ -92,7 +92,7 @@ tr.me { background: #fff7ed; box-shadow: inset 4px 0 0 #f59e0b; }
 
   <div class="tabs">
     <button class="tab active" id="tabOverall" onclick="selectOverall()">Overall</button>
-    <button class="tab" id="tabWeek" onclick="selectWeekMode()">By week</button>
+    <button class="tab" id="tabWeek" onclick="selectWeekMode()">By week</button><!-- text set from WEEK_UNIT at init -->
     <select class="week-select" id="weekSelect" style="display:none" onchange="load()"></select>
     <button class="refresh" id="refreshBtn" onclick="load()" title="Refresh">↻ Refresh</button>
   </div>
@@ -125,6 +125,12 @@ const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbwhousf9U3W_KSbEFs
 
 // Every week that exists (kept in sync by build_week.py). The "By week" dropdown always lists
 // these, merged with any weeks that already have submissions — so new weeks show up immediately.
+/* UNIT:START */ const WEEK_UNIT = "Set"; /* UNIT:END */
+// Display only. Option VALUES stay the real "… — Week N" labels the backend
+// grades against; only the text shown to the reader is relabelled.
+const unitLabel = w => WEEK_UNIT === "Week" ? w : w.replace(/\bWeek\b/g, WEEK_UNIT);
+const unitWord  = () => WEEK_UNIT.toLowerCase();
+
 const ALL_WEEKS = [
   /* WEEKS:START */
   "Grade 1 — Week 1", "Grade 1 — Week 2", "Grade 1 — Week 3", "Grade 1 — Week 4", "Grade 1 — Week 5", "Grade 1 — Week 6", "Grade 1 — Week 7"
@@ -225,14 +231,14 @@ function syncWeeks(weeks) {
   knownWeeks = merged;
   const sel = document.getElementById('weekSelect');
   const current = sel.value;
-  sel.innerHTML = merged.map(w => `<option value="${escapeAttr(w)}">${escapeHtml(w)}</option>`).join('');
+  sel.innerHTML = merged.map(w => `<option value="${escapeAttr(w)}">${escapeHtml(unitLabel(w))}</option>`).join('');
   if (merged.includes(current)) sel.value = current;
 }
 
 function render(data) {
   const overall = data.scope === 'cumulative';
   if (!data.rows.length) {
-    showMsg(overall ? 'No public scores yet — be the first!' : 'No public scores for this week yet.');
+    showMsg(overall ? 'No public scores yet — be the first!' : 'No public scores for this ' + unitWord() + ' yet.');
     document.getElementById('note').textContent = footNote(data);
     return;
   }
@@ -272,7 +278,7 @@ async function findMe() {
       out.textContent = 'No scores found for “' + name + '” yet. Check the spelling matches your submission.';
       return;
     }
-    const scope = data.scope === 'week' ? 'this week' : 'overall';
+    const scope = data.scope === 'week' ? ('this ' + unitWord()) : 'overall';
     out.className = 'result hit';
     out.textContent = 'You’re #' + data.rank + ' of ' + data.totalStudents
       + ' ' + scope + ' with ' + data.points + ' point' + (data.points === 1 ? '' : 's') + '. 🎉';
@@ -284,6 +290,7 @@ async function findMe() {
 function escapeHtml(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function escapeAttr(s) { return escapeHtml(s).replace(/'/g, '&#39;'); }
 
+document.getElementById('tabWeek').textContent = 'By ' + unitWord();
 syncWeeks([]);   // populate the week dropdown from ALL_WEEKS right away
 load();
 </script>

@@ -27,10 +27,31 @@ week.json shape:
 Problem types: "number"/"text" → free-text box; "choice" → A–E radio chips.
 "image" is optional on any problem.
 """
-import base64, json, pathlib, sys, html as _html
+import base64, json, pathlib, re, sys, html as _html
 
 ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbwhousf9U3W_KSbEFs6HYTJ6ySsyeEK0fRcsHvM0p_L6wVAZteLLDNdfn-Itzh1BI6Vsg/exec"
 ACCENTS = ["#4f46e5", "#0891b2", "#7c3aed", "#db2777", "#ea580c", "#16a34a"]  # per-problem accents (up to 6)
+
+# ─── Presentation: what students and teachers SEE (display only) ──────────────
+# Flip these to re-frame the site without touching any data. Nothing here changes
+# the folder names (week1/…), the file names (GRADE_weekN.html), or each
+# week.json's "week_label" — that label is the key posted with every submission
+# and matched against the Sheet's AnswerKey tab, so scoring, the leaderboard and
+# every answer already submitted keep working across the rename.
+#
+# Back to the original weekly-challenge framing:
+#     UNIT_NAME = "Week";  SHOW_DUE = True;  SHOW_POINTS = True
+# then rebuild everything:  python3 build_week.py --all
+UNIT_NAME   = "Set"    # the word students see: "Set" or "Week"
+SHOW_DUE    = False    # the "📅 Due: …" pill on each page
+SHOW_POINTS = False    # the "🏆 N problems · 1 point each" pill
+
+
+def disp(label):
+    """A label as shown to students. Stored/posted labels are never rewritten."""
+    return label if UNIT_NAME == "Week" else re.sub(r"\bWeek\b", UNIT_NAME, label)
+
+
 WEEK_COLORS = ["#4f46e5", "#0891b2", "#7c3aed", "#db2777", "#ea580c", "#16a34a", "#0284c7", "#9333ea"]
 EMOJI = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","🔟","⭐","🏁"]  # 1–10 keycaps; 11 = ⭐; 12 = 🏁 finish flag (final week)
 
@@ -349,8 +370,16 @@ def render_problem(i, p, week_dir, img_max_width=None, page_starts=()):
 def render_week(week_dir, cfg):
     problems = cfg["problems"]
     num = len(problems)
-    title = cfg.get("title", cfg["week_label"])
+    title = disp(cfg.get("title", cfg["week_label"]))
     due = cfg.get("due", "Sunday night")
+    week_info = ""
+    pills = []
+    if SHOW_DUE:
+        pills.append(f'      <span>\\U0001f4c5 Due: {esc(due)}</span>')
+    if SHOW_POINTS:
+        pills.append(f'      <span>\\U0001f3c6 {num} problems \u00b7 1 point each</span>')
+    if pills:
+        week_info = '    <div class="week-info">\n' + "\n".join(pills) + '\n    </div>\n'
     img_max_width = cfg.get("image_max_width")   # week-level default cap for figures, e.g. "280px"
     # Which problems start a fresh printed page. Default: three per page. Override per week
     # with "page_starts": [4] (1-based problem numbers), or [] to let the print flow run free.
@@ -381,11 +410,7 @@ def render_week(week_dir, cfg):
     <button class="print-btn" onclick="window.print()">\U0001f5a8 Print</button>
     <h1>{esc(title)}</h1>
     <div class="sub">Math Challenge Problems</div>
-    <div class="week-info">
-      <span>\U0001f4c5 Due: {esc(due)}</span>
-      <span>\U0001f3c6 {num} problems · 1 point each</span>
-    </div>
-  </div>
+{week_info}  </div>
 
   <div class="name-box">
     <label for="sname">Your name:</label>
@@ -524,7 +549,7 @@ def rebuild_index():
             f'    <a class="week-link" href="weeks/grade1/week{n}/{html_name}">\n'
             f'      <span class="emoji">{emoji}</span>\n'
             f'      <span class="text">\n'
-            f'        <span class="title">Week {n}</span>\n'
+            f'        <span class="title">{UNIT_NAME} {n}</span>\n'
             f'        <span class="desc">Grade 1 · {nprob} problems</span>\n'
             f'      </span>\n'
             f'    </a>{sol_btn}\n'
@@ -547,7 +572,14 @@ def update_leaderboard_weeks():
     start, end = "/* WEEKS:START */", "/* WEEKS:END */"
     a, b = text.index(start) + len(start), text.index(end)
     js = "\n  " + ", ".join(json.dumps(l, ensure_ascii=False) for l in labels) + "\n  "
-    lb.write_text(text[:a] + js + text[b:])
+    text = text[:a] + js + text[b:]
+    # Keep the leaderboard's display word in step with UNIT_NAME (display only —
+    # the ALL_WEEKS values above stay the real labels the backend grades against).
+    us, ue = "/* UNIT:START */", "/* UNIT:END */"
+    if us in text:
+        ua, ub = text.index(us) + len(us), text.index(ue)
+        text = text[:ua] + f' const WEEK_UNIT = "{UNIT_NAME}"; ' + text[ub:]
+    lb.write_text(text)
     print(f"  leaderboard.html: {len(labels)} weeks listed")
 
 
