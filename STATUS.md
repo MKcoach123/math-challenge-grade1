@@ -45,6 +45,63 @@ The keys live in the Sheet's `AnswerKey` tab only. (Grade 4 keeps a local gitign
   `https://script.google.com/macros/s/AKfycbwhousf9U3W_KSbEFs6HYTJ6ySsyeEK0fRcsHvM0p_L6wVAZteLLDNdfn-Itzh1BI6Vsg/exec`
   (wired into `weeks/grade1/build_week.py` line ~32 **and** `weeks/grade1/leaderboard.html`)
 
+## 1a. "Set" vs "Week" — presentation toggles (added 2026-10-20)
+
+Teachers are using this as **supplemental material**, not a timed 12-week run, so the pages now say
+**Set** and the deadline / points pills are hidden. This is a **display layer only** — flip it back
+any time.
+
+In `weeks/grade1/build_week.py`, just under `ACCENTS`:
+
+| Flag | Now | Controls |
+|---|---|---|
+| `UNIT_NAME` | `"Set"` | the word on page headers, home-page cards, the leaderboard dropdown and its "By set" tab |
+| `SHOW_DUE` | `False` | the "📅 Due: …" pill, and the due note on the current card |
+| `SHOW_POINTS` | `False` | the "🏆 N problems · 1 point each" pill |
+
+To restore the original framing: set them back (`"Week"`, `True`, `True`) and run
+`python3 build_week.py --all`. Verified round-trip on 2026-10-20 — every string returns.
+
+`SHOW_STATUS` exists in Grade 4 only — Grade 1 never had the week-status cards (see the open
+items), so there is nothing to switch off here. If that feature is ever mirrored across, bring the
+flag with it.
+
+### What deliberately did NOT change — this is the whole trick
+`week.json`'s **`week_label` stays `"Grade 1 — Week N"`**, and so do the folder names (`week1/…`),
+the page file names (`grade1_weekN.html`) and the solution file names. That label is posted with
+every submission and matched against the Sheet's **`AnswerKey`** tab, so **scoring, the leaderboard
+and every answer already submitted keep working** across the rename. The Sheet needs no edit.
+
+The leaderboard keeps the two apart explicitly: each `<option>`'s **value** is the real
+`… — Week N` label it queries with, while its **text** is relabelled through `unitLabel()`.
+`WEEK_UNIT` in `leaderboard.html` sits between `/* UNIT:START */ … /* UNIT:END */` and is rewritten
+from `UNIT_NAME` by `build_week.py`, so there is one source of truth.
+
+### The two bits that are NOT toggle-driven
+1. **Solution page headings** (`<title>` and `<h1>`) are hand-built HTML, relabelled in place.
+   To flip them back, from the grade folder:
+   ```
+   python3 - <<'EOF'
+   import pathlib, re
+   for f in pathlib.Path('.').glob('week*/solutions_week*.html'):
+       t = f.read_text()
+       t = re.sub(r'(<title>[^<]*?)\bSet\b', lambda m: m.group(1)+'Week', t, count=1)
+       t = re.sub(r'(<h1>)\s*Set\b',          lambda m: m.group(1)+'Week', t, count=1)
+       f.write_text(t)
+   EOF
+   python3 gate_solutions.py 4891 2026
+   ```
+2. **Home-page taglines** were reworded to be framing-neutral rather than toggled, so they read
+   correctly either way: "Solve problems · climb the leaderboard", "See the latest scores and
+   overall rankings", and the footnote "Solve online, or print the problems and work on paper."
+   (was "New problems every week. Submit before Friday afternoon!").
+
+⚠️ **Still says "Weekly":** the program name — `<title>` and `<h1>` on `index.html`, and the
+teacher page — remains "Grade 1 **Weekly** Math Challenge". That is the programme's own name from
+the scope doc, so renaming it was left as a deliberate decision rather than assumed.
+
+---
+
 ## 2. Setup — all done ✅
 
 - [x] Google Sheet + Apps Script Web App created and deployed (`weeks/grade1/SHEET_SETUP.md`)
