@@ -225,12 +225,12 @@ body { font-family: 'Segoe UI', system-ui, Arial, sans-serif; background: #f0f4f
         <label class="vis-opt">
           <input type="radio" name="display" value="Private" checked>
           <span class="vo-emoji">🔒</span>
-          <span><span class="vo-title">No, keep me private</span><br><span class="vo-sub">Hidden from classmates · find your own rank by name</span></span>
+          <span><span class="vo-title">No, keep me private</span><br><span class="vo-sub">Your name and score stay off the leaderboard</span></span>
         </label>
         <label class="vis-opt">
           <input type="radio" name="display" value="Public">
           <span class="vo-emoji">✅</span>
-          <span><span class="vo-title">Yes, show my name</span><br><span class="vo-sub">Classmates will see your name &amp; score</span></span>
+          <span><span class="vo-title">Yes, show my name</span><br><span class="vo-sub">Anyone who opens the leaderboard can see your name &amp; score</span></span>
         </label>
       </div>
     </div>
@@ -281,8 +281,8 @@ async function submitAnswers(btn) {
   const display = (document.querySelector('input[name="display"]:checked') || {}).value || 'Private';
   // Make the leaderboard-visibility choice an explicit, conscious decision before saving.
   const sure = (display === 'Public')
-    ? confirm('You chose to SHOW YOUR NAME on the class leaderboard.\nClassmates will see your name and score.\n\nSubmit your answers?')
-    : confirm('You chose to stay PRIVATE.\nYour name stays hidden from classmates (you can still look up your own rank by name).\n\nSubmit your answers?');
+    ? confirm('You chose to SHOW YOUR NAME on the leaderboard.\nAnyone who opens the leaderboard can see your name and score.\n\nSubmit your answers?')
+    : confirm('You chose to stay PRIVATE.\nYour name and score stay off the leaderboard.\n\nSubmit your answers?');
   if (!sure) return;
 
   const payload = Object.assign({ week: WEEK_LABEL, name: name, display: display }, answers);

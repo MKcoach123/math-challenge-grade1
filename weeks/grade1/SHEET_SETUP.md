@@ -38,7 +38,7 @@ Paste the `/exec` URL into the `ENDPOINT_URL = ""` line in **both** places, then
 ## 5. Test
 - Open a week page, submit a name + answers → a row appears in `Submissions`.
 - Open `leaderboard.html` → your score shows (if you chose "show my name"); private names
-  appear only via **Find my rank**.
+  do not appear anywhere on the site, including **Find my rank**.
 
 ## Updating the script later
 **Deploy → Manage deployments → Edit ✏ → Version: New version** keeps the **same URL**.
@@ -46,8 +46,8 @@ A brand-new deployment makes a *new* URL (and you'd have to re-paste it everywhe
 
 ## Notes
 - **One URL for all weeks & the leaderboard.** Reuse it; the `Week` column separates weeks.
-- **Privacy:** the form defaults to **Private**; private students are hidden from the public
-  board but can self-check via "Find my rank". Latest submission sets a student's name + choice.
+- **Privacy:** the form defaults to **Private**; private students' names and
+  scores appear nowhere on the site, including "Find my rank". Latest submission sets a student's name + choice.
 - **Scoring:** 1 point per correct answer, compared case/space-insensitively. A week with no
   `AnswerKey` row just scores 0 until you fill it in.
 - **One submission per student:** not enforced — re-submits add rows; the leaderboard uses each

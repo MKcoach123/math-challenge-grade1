@@ -108,7 +108,7 @@ tr.me { background: #fff7ed; box-shadow: inset 4px 0 0 #f59e0b; }
 
   <div class="findme">
     <h2>Find my rank</h2>
-    <p>Stayed private? Type your name exactly as you submitted it to see your own position.</p>
+    <p>Chose to show your name? Type it exactly as you submitted it to see your position. Private scores are not shown here.</p>
     <div class="row">
       <input type="text" id="meName" placeholder="First name Last initial" autocomplete="off"
              onkeydown="if(event.key==='Enter')findMe()">
@@ -275,7 +275,7 @@ async function findMe() {
     if (!data.ok) throw new Error(data.error || 'Lookup failed');
     if (!data.found) {
       out.className = 'result miss';
-      out.textContent = 'No scores found for “' + name + '” yet. Check the spelling matches your submission.';
+      out.textContent = 'No public scores found for “' + name + '”. Check the spelling matches your submission.';
       return;
     }
     const scope = data.scope === 'week' ? ('this ' + unitWord()) : 'overall';

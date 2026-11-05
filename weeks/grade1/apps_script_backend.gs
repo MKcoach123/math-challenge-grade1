@@ -66,7 +66,7 @@ function doGet(e) {
     var view = p.view || 'leaderboard';
 
     if (view === 'findme') {
-      return json(findRank(p.name, p.week));        // private students look themselves up
+      return json(findRank(p.name, p.week));        // public students only — see findRank
     }
     if (view === 'debug') {
       return json(debugInfo());                     // inspect what the sheet parsing sees
@@ -98,13 +98,17 @@ function leaderboard(weekLabel) {
   };
 }
 
-/** A single student's standing — works whether they are public or private. */
+/**
+ * A single student's standing, for students who chose Public only. This endpoint
+ * is open to anyone, so a name alone must never reveal a Private student's score;
+ * they get the same "not found" as a name that never submitted.
+ */
 function findRank(name, weekLabel) {
   if (!name || !nameKey(name)) return { ok: true, found: false };
   var s = computeStandings(weekLabel);
   var key = nameKey(name);
   for (var i = 0; i < s.standings.length; i++) {
-    if (s.standings[i].key === key) {
+    if (s.standings[i].key === key && s.standings[i].display === 'Public') {
       var x = s.standings[i];
       return {
         ok: true, found: true, name: x.name, rank: x.rank,

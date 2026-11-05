@@ -15,3 +15,6 @@ __pycache__/
 # Catch-all: any .pages whose name mentions a solution, whatever the suffix.
 # "week4_solutions NEW.pages" slipped past the patterns above on 2026-09-15.
 **/*[Ss]olution*.pages
+
+# Source docs stay local: they carry names and aren't needed by the site.
+**/*.pages
