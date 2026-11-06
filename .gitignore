@@ -18,3 +18,6 @@ __pycache__/
 
 # Source docs stay local: they carry names and aren't needed by the site.
 **/*.pages
+
+# Answer keys and passcodes NEVER go in this public repo.
+ANSWER_KEYS.md
