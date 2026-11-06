@@ -184,7 +184,10 @@ function scoreOne(row, keyArr) {
 
 /* ───────────────────────── helpers ───────────────────────── */
 
-/** Diagnostic: shows the tabs found, the parsed answer key, and distinct submission weeks. */
+/**
+ * Diagnostic: shows the tabs found, how many answers each week has, and distinct
+ * submission weeks. This endpoint is public, so it must never return the answers.
+ */
 function debugInfo() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var tabs = ss.getSheets().map(function (s) { return s.getName(); });
@@ -195,7 +198,7 @@ function debugInfo() {
     ok: true,
     tabs: tabs,
     answerKeyHeaders: (getRows(ANSWER_KEY)[0] ? Object.keys(getRows(ANSWER_KEY)[0]) : []),
-    answerKeyParsed: keyMap,                 // normalized week -> [a1,a2,a3]
+    answerCounts: Object.keys(keyMap).reduce(function (acc, w) { acc[w] = keyMap[w].length; return acc; }, {}),
     submissionWeeks: subWeeks,               // exact Week text -> count
     weekMatch: Object.keys(subWeeks).reduce(function (acc, w) { acc[w] = !!keyMap[norm(w)]; return acc; }, {})
   };
