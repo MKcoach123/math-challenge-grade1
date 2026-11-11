@@ -47,6 +47,7 @@ tbody tr { border-bottom: 1px solid #f1f5f9; }
 tbody tr:last-child { border-bottom: none; }
 td.rank { font-weight: 800; color: #64748b; width: 64px; }
 td.name { font-weight: 600; overflow-wrap: anywhere; }
+.name-cut { cursor: pointer; border-bottom: 1px dashed #c7d2fe; }
 td.pts { text-align: right; font-weight: 800; color: #4f46e5; }
 td.weeks { text-align: right; color: #94a3b8; width: 90px; }
 th.pts, th.weeks { text-align: right; }
@@ -110,7 +111,7 @@ tr.me { background: #fff7ed; box-shadow: inset 4px 0 0 #f59e0b; }
     <h2>Find my rank</h2>
     <p>Chose to show your name? Type it exactly as you submitted it to see your position. Private scores are not shown here.</p>
     <div class="row">
-      <input type="text" id="meName" placeholder="First name Last initial" autocomplete="off"
+      <input type="text" id="meName" placeholder="First name Last initial" maxlength="75" autocomplete="off"
              onkeydown="if(event.key==='Enter')findMe()">
       <button onclick="findMe()">Find me</button>
     </div>
@@ -249,7 +250,7 @@ function render(data) {
     const cls = r.rank <= 3 ? ' class="top' + r.rank + '"' : '';
     return '<tr' + cls + '>'
       + '<td class="rank">' + r.rank + '</td>'
-      + '<td class="name">' + escapeHtml(shortName(r.name)) + '</td>'
+      + '<td class="name">' + nameCell(r.name) + '</td>'
       + (overall ? '<td class="weeks">' + r.weeksPlayed + '</td>' : '')
       + '<td class="pts">' + r.points + '</td></tr>';
   }).join('');
@@ -287,8 +288,16 @@ async function findMe() {
   }
 }
 
-// A very long name would stretch the table and push the Points column out of view.
-function shortName(s) { s = String(s); return s.length > 40 ? s.slice(0, 40) + '…' : s; }
+// Names longer than the form allows (75) come from before the limit. Show the start,
+// and the whole name when tapped, so one entry can't take over the board.
+const NAME_MAX = 75;
+function nameCell(s) {
+  s = String(s);
+  if (s.length <= NAME_MAX) return escapeHtml(s);
+  return '<span class="name-cut" title="Show the full name" data-full="' + escapeAttr(s) + '"'
+       + ' onclick="this.textContent = this.dataset.full; this.className = \'\'">'
+       + escapeHtml(s.slice(0, NAME_MAX)) + '…</span>';
+}
 function escapeHtml(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function escapeAttr(s) { return escapeHtml(s).replace(/'/g, '&#39;'); }
 

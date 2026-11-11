@@ -231,6 +231,7 @@ body {{ font-family: 'Segoe UI', system-ui, Arial, sans-serif; background: #f0f4
 .name-box label {{ font-weight: 700; font-size: 16px; white-space: nowrap; }}
 .name-box input {{ flex: 1; border: 2px solid #c7d2fe; border-radius: 8px; padding: 10px 14px; font-size: 16px; outline: none; transition: border-color .2s; }}
 .name-box input:focus {{ border-color: #4f46e5; }}
+.name-count {{ font-size: 12px; color: #94a3b8; white-space: nowrap; }}
 
 .problem {{ background: white; border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,.08); border-left: 6px solid #4f46e5; }}
 {accent_nth}
@@ -290,6 +291,7 @@ body {{ font-family: 'Segoe UI', system-ui, Arial, sans-serif; background: #f0f4
   .header .week-info span {{ background: none !important; padding: 0 !important; border-radius: 0 !important; }}
   .print-btn {{ display: none !important; }}
   .name-box {{ background: none !important; box-shadow: none !important; border-radius: 0 !important; border: none !important; padding: 0 !important; margin-bottom: 8pt !important; display: flex; align-items: baseline; gap: 8pt; }}
+  .name-count {{ display: none !important; }}
   .name-box label {{ font-size: 11pt !important; font-weight: 700 !important; white-space: nowrap; }}
   .name-box input {{ flex: 1; border: none !important; border-bottom: 1pt solid #444 !important; border-radius: 0 !important; font-size: 11pt !important; background: none !important; padding: 1pt 4pt !important; }}
   #quiz {{ display: block; }}
@@ -414,7 +416,9 @@ def render_week(week_dir, cfg):
 
   <div class="name-box">
     <label for="sname">Your name:</label>
-    <input type="text" id="sname" placeholder="First name Last initial" maxlength="40" autocomplete="off">
+    <input type="text" id="sname" placeholder="First name Last initial" maxlength="75" autocomplete="off"
+           oninput="document.getElementById('snameCount').textContent = this.value.length + ' / 75 characters'">
+    <span class="name-count" id="snameCount">max 75 characters</span>
   </div>
 
   <form id="quiz">
