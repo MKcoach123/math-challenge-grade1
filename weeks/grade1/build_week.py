@@ -414,7 +414,7 @@ def render_week(week_dir, cfg):
 
   <div class="name-box">
     <label for="sname">Your name:</label>
-    <input type="text" id="sname" placeholder="First name Last initial" autocomplete="off">
+    <input type="text" id="sname" placeholder="First name Last initial" maxlength="40" autocomplete="off">
   </div>
 
   <form id="quiz">

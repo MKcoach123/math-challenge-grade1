@@ -46,7 +46,7 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: #
 tbody tr { border-bottom: 1px solid #f1f5f9; }
 tbody tr:last-child { border-bottom: none; }
 td.rank { font-weight: 800; color: #64748b; width: 64px; }
-td.name { font-weight: 600; }
+td.name { font-weight: 600; overflow-wrap: anywhere; }
 td.pts { text-align: right; font-weight: 800; color: #4f46e5; }
 td.weeks { text-align: right; color: #94a3b8; width: 90px; }
 th.pts, th.weeks { text-align: right; }
@@ -249,7 +249,7 @@ function render(data) {
     const cls = r.rank <= 3 ? ' class="top' + r.rank + '"' : '';
     return '<tr' + cls + '>'
       + '<td class="rank">' + r.rank + '</td>'
-      + '<td class="name">' + escapeHtml(r.name) + '</td>'
+      + '<td class="name">' + escapeHtml(shortName(r.name)) + '</td>'
       + (overall ? '<td class="weeks">' + r.weeksPlayed + '</td>' : '')
       + '<td class="pts">' + r.points + '</td></tr>';
   }).join('');
@@ -287,6 +287,8 @@ async function findMe() {
   }
 }
 
+// A very long name would stretch the table and push the Points column out of view.
+function shortName(s) { s = String(s); return s.length > 40 ? s.slice(0, 40) + '…' : s; }
 function escapeHtml(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function escapeAttr(s) { return escapeHtml(s).replace(/'/g, '&#39;'); }
 
