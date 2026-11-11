@@ -56,6 +56,7 @@ WEEK_COLORS = ["#4f46e5", "#0891b2", "#7c3aed", "#db2777", "#ea580c", "#16a34a",
 EMOJI = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","🔟","⭐","🏁"]  # 1–10 keycaps; 11 = ⭐; 12 = 🏁 finish flag (final week)
 
 GRADE_DIR = pathlib.Path(__file__).parent
+NAME_FILTER_JS = (GRADE_DIR / "name_filter.js").read_text()
 REPO_ROOT = GRADE_DIR.parent.parent
 INDEX = REPO_ROOT / "index.html"
 
@@ -454,9 +455,13 @@ const ENDPOINT_URL = "{ENDPOINT_URL}";
 const WEEK_LABEL = "{esc(cfg['week_label'])}";
 const NUM_PROBLEMS = {num};
 
+{NAME_FILTER_JS}
+const RUDE_NAME_MSG = 'Please choose a different name.\\nNames can’t include rude or unkind words.';
+
 async function submitAnswers(btn) {{
   const name = document.getElementById('sname').value.trim();
   if (!name) {{ alert('Please enter your name first!'); return; }}
+  if (isRudeName(name)) {{ alert(RUDE_NAME_MSG); document.getElementById('sname').focus(); return; }}
 
   const answers = {{}};
   for (let i = 1; i <= NUM_PROBLEMS; i++) {{
@@ -488,6 +493,7 @@ async function submitAnswers(btn) {{
   try {{
     const res = await fetch(ENDPOINT_URL, {{ method: 'POST', headers: {{ 'Content-Type': 'text/plain;charset=utf-8' }}, body: JSON.stringify(payload) }});
     const data = await res.json();
+    if (data.rude) {{ alert(RUDE_NAME_MSG); return; }}
     if (!data.ok) throw new Error(data.error || 'Save failed');
     alert('Thanks ' + name + '! Your answers have been recorded. ✓');
   }} catch (e) {{
@@ -587,17 +593,29 @@ def update_leaderboard_weeks():
     print(f"  leaderboard.html: {len(labels)} weeks listed")
 
 
+def update_backend_name_filter():
+    """Copy name_filter.js into the backend, so the page and the Sheet check the same words."""
+    gs = GRADE_DIR / 'apps_script_backend.gs'
+    start, end = "/* NAME_FILTER:START */", "/* NAME_FILTER:END */"
+    old = gs.read_text()
+    a, b = old.index(start) + len(start), old.index(end)
+    new = old[:a] + "\n" + NAME_FILTER_JS + old[b:]
+    if new != old:
+        gs.write_text(new)
+        print("  apps_script_backend.gs: name filter changed — redeploy as a New version")
+
+
 def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
         print(__doc__); return
     if argv[0] == "--index":
-        rebuild_index(); update_leaderboard_weeks(); return
+        rebuild_index(); update_leaderboard_weeks(); update_backend_name_filter(); return
     if argv[0] == "--all":
         for d in all_weeks():
             build_week(d)
-        rebuild_index(); update_leaderboard_weeks(); return
+        rebuild_index(); update_leaderboard_weeks(); update_backend_name_filter(); return
     build_week(argv[0])
-    rebuild_index(); update_leaderboard_weeks()
+    rebuild_index(); update_leaderboard_weeks(); update_backend_name_filter()
 
 
 if __name__ == "__main__":
